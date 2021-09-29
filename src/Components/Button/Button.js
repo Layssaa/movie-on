@@ -1,4 +1,4 @@
-import { ButtonDefault, ButtonInitial } from "./ButtonStyled"
+import { ButtonInitial } from "./ButtonStyled"
 
 export default function Button(props) {
     return (

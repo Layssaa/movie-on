@@ -1,6 +1,5 @@
-import { ListMovie, ImgMovieCart, ImgTrash, ButtonCancel } from "./cardCart.style";
+import { ListMovie, ImgMovieCart, ImgTrash } from "./cardCart.style";
 import trash from "../../images/trash.png"
-import Button from "../Button/Button";
 
 const imgURL = "https://image.tmdb.org/t/p/w200";
 

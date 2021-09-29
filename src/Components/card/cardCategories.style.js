@@ -8,7 +8,7 @@ export default function CardCategories(props) {
     }
     return (
         <CategorieCard>
-            <img onClick={()=>{goToCatorie(props.id)}} src={iconMovie} />
+            <img onClick={()=>{goToCatorie(props.id)}} src={iconMovie} alt="icon that symbolizes categories" />
             <h3 onClick={()=>{goToCatorie(props.id)}}>{props.children}</h3>
         </CategorieCard>
     )

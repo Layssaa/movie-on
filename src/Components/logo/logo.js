@@ -1,4 +1,3 @@
-import gif from "../../images/gif/completed.gif"
 import img_Secondary from "../../images/Logo-Secondary.png";
 import { LogoImg, LogoImgSecondary } from "./logoStyle";
 

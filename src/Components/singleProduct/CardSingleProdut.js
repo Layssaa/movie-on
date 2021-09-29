@@ -1,5 +1,4 @@
 import { ImgMovie, ProductDiv, Info, Price, Evaluation } from "./CardSingleProductStyle";
-import { ButtonDefault } from "../Button/ButtonStyled";
 
 const imgURL = "https://image.tmdb.org/t/p/w300";
 
