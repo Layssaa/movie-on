@@ -11,8 +11,8 @@ export default function FormLogin(props) {
     const { handleLogin } = useContext(MyContext);
 
     const changePage = async (values) => {
+        await handleLogin(values);
         props.history.push("/home");
-        handleLogin(values);
     }
 
     const formik = useFormik({

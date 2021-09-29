@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../services/api"
 
 export const MyContext = React.createContext({
@@ -14,18 +14,19 @@ export function MyProvider({ children }) {
     const [CartMovie, setMovieOnCart] = useState([]);
     const [wishList, setWishList] = useState([]);
     const [moviesOnHistory, setMovieOnHistory] = useState([]);
-    const [user, setUser] = useState();
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState({email: "", password: ""});
+
+    useEffect(()=> setLoading(false));
 
     // ------------------------- Login -------------------------
     const handleLogin = async (values) => {
-        console.log(values)
-
         const userLogin = {
             email: values.email,
             password: values.password
         }
 
-        api.post("/login", { userLogin })
+       await api.post("/login", { userLogin })
             .then(response => {
 
                 if (response.data.length == 0) {
@@ -38,13 +39,16 @@ export function MyProvider({ children }) {
                 setUser(response);
             });
 
+        setLoading(false)
+
         // criar validações
         // chamar no button do login/signup
     }
 
     // ------------------------- Logout -------------------------
     const handleLogout = async () => {
-        setAuthenticated(false)
+        setUser({email: "", password: ""});
+        setAuthenticated(false);
     }
 
     // ------------------------- Sign Up -------------------------
@@ -142,7 +146,9 @@ export function MyProvider({ children }) {
 
                 handleLogin,
                 handleSignUp,
-                authenticated
+                authenticated,
+
+                loading
             }}
         >
             {children}
