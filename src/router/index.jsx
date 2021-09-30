@@ -12,16 +12,17 @@ import { Logo } from '../Components/logo/logo';
 function CustomRoute(props) {
     const { authenticated, loading } = useContext(MyContext);
 
-    if(loading){
-        return (<Main>
-            <Logo src={gif} />
-        </Main>)
+    if (loading) {
+        return (
+            <Main>
+                <Logo src={gif} />
+            </Main>)
     }
 
     if (props.isPrivate && !authenticated) {
         return <Redirect to="/login" exact />;
     }
-    
+
     return <Route {...props} />;
 }
 

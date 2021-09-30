@@ -15,9 +15,9 @@ export function MyProvider({ children }) {
     const [wishList, setWishList] = useState([]);
     const [moviesOnHistory, setMovieOnHistory] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState({email: "", password: ""});
+    const [user, setUser] = useState({ email: "", password: "" });
 
-    useEffect(()=> setLoading(false));
+    useEffect(() => setLoading(false));
 
     // ------------------------- Login -------------------------
     const handleLogin = async (values) => {
@@ -26,7 +26,7 @@ export function MyProvider({ children }) {
             password: values.password
         }
 
-       await api.post("/login", { userLogin })
+        await api.post("/login", { userLogin })
             .then(response => {
 
                 if (response.data.length == 0) {
@@ -47,12 +47,13 @@ export function MyProvider({ children }) {
 
     // ------------------------- Logout -------------------------
     const handleLogout = async () => {
-        setUser({email: "", password: ""});
+        setUser({ email: "", password: "" });
         setAuthenticated(false);
     }
 
     // ------------------------- Sign Up -------------------------
     const handleSignUp = async (values) => {
+        console.log(values);
 
         const userSignUp = {
             name: values.name,
@@ -61,9 +62,8 @@ export function MyProvider({ children }) {
             repeatpassword: values.repeatpassword
         }
 
-        api.post("/login/signup", { userSignUp })
+        await api.post("/login/signup", { userSignUp })
             .then(response => {
-
                 if (response.data.length == 0) {
                     setAuthenticated(false);
                     return console.log("não tem");

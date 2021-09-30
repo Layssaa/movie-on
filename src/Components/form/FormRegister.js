@@ -8,8 +8,8 @@ export default function FormRegister(props) {
     const { handleSignUp } = useContext(MyContext);
 
     const changePage = (values) => {
-        props.history.push("/home");
         handleSignUp(values);
+        props.history.push("/home");
     }
 
     const formik = useFormik({
@@ -20,6 +20,9 @@ export default function FormRegister(props) {
             repeatpassword: ""
         },
         onSubmit: values => {
+            if (values.password != values.repeatpassword) {
+                return
+            };
             changePage(values);
         }
     });
