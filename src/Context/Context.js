@@ -31,10 +31,8 @@ export function MyProvider({ children }) {
 
                 if (response.data.length == 0) {
                     setAuthenticated(false);
-                    return console.log("não tem");
+                    return
                 };
-
-                console.log("tem");
                 setAuthenticated(true);
                 setUser(response);
             });
@@ -53,7 +51,6 @@ export function MyProvider({ children }) {
 
     // ------------------------- Sign Up -------------------------
     const handleSignUp = async (values) => {
-        console.log(values);
 
         const userSignUp = {
             name: values.name,
@@ -66,10 +63,9 @@ export function MyProvider({ children }) {
             .then(response => {
                 if (response.data.length == 0) {
                     setAuthenticated(false);
-                    return console.log("não tem");
+                    return
                 };
 
-                console.log("tem");
                 setAuthenticated(true);
                 setUser(response);
             });
@@ -79,24 +75,51 @@ export function MyProvider({ children }) {
     }
 
     // ------------------------- cart movie -------------------------
-    const setAddMovie = (movie) => {
+    const setAddMovie = async (movie) => {
+
         setMovieOnCart((prevState) => {
             if (prevState.find((film) => film.id === movie.id)) {
                 return prevState
             };
             return prevState.concat(movie);
         });
+
+        if (CartMovie.length == 0) {
+            return console.log("vazio")
+        }
+
+        console.log(CartMovie)
+        api.post("/cart", { CartMovie, user })
+            .then(response => {
+                if (response.data.length == 0) {
+                    return
+                };
+                console.log("adicionado ao carrinho!");
+            });
     };
 
     const setRemoveMovie = (movie) => {
         setMovieOnCart((prevState) => {
             return prevState.filter((element) => element.id !== movie.id);
         });
+
+        if (CartMovie.length == 0) {
+            return console.log("vazio")
+        }
+
+        api.post("/cart/remove", { CartMovie, user })
+            .then(response => {
+                if (response.data.length == 0) {
+                    return
+                };
+                console.log("removido do carrinho!");
+            });
     };
 
     const setCleanMovie = () => {
         setMovieOnCart([]);
     };
+
     // ------------------------- wishlist -------------------------
 
     const setAddWish = (movie) => {
@@ -106,12 +129,36 @@ export function MyProvider({ children }) {
             };
             return prevState.concat(movie);
         });
+
+        if (wishList.length == 0) {
+            return console.log("vazio")
+        }
+
+        api.post("/wishList", { wishList, user })
+            .then(response => {
+                if (response.data.length == 0) {
+                    return
+                };
+                console.log("adicionado a wishList!");
+            });
     };
 
     const setRemoveWish = (movie) => {
         setWishList((prevState) => {
             return prevState.filter((element) => element.id !== movie.id)
         });
+
+        if (wishList.length == 0) {
+            return console.log("vazio")
+        }
+
+        api.post("/wishList/remove", { wishList, user })
+            .then(response => {
+                if (response.data.length == 0) {
+                    return
+                };
+                console.log("removido da wishList!");
+            });
     };
 
     // ------------------------- history -------------------------
@@ -120,10 +167,34 @@ export function MyProvider({ children }) {
         setMovieOnHistory((prevState) => {
             return prevState.concat(movie);
         });
+
+        if (moviesOnHistory.length == 0) {
+            return console.log("vazio")
+        }
+
+        api.post("/history", { moviesOnHistory, user })
+            .then(response => {
+                if (response.data.length == 0) {
+                    return
+                };
+                console.log("adicionado ao historico");
+            });
     };
 
     const setCleanHistory = (movie) => {
         setMovieOnHistory([]);
+
+        if (moviesOnHistory.length == 0) {
+            return console.log("vazio")
+        }
+
+        api.post("/history/remove", { moviesOnHistory, user })
+            .then(response => {
+                if (response.data.length == 0) {
+                    return
+                };
+                console.log("removido do historico!");
+            });
     }
 
     return (
