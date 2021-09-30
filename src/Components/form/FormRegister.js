@@ -3,6 +3,7 @@ import { MyContext } from "../../Context/Context";
 import Input from "../Input/Input"
 import { useFormik } from 'formik';
 import { ButtonForm } from "../Button/ButtonStyled";
+import * as Yup from 'yup';
 
 export default function FormRegister(props) {
     const { handleSignUp } = useContext(MyContext);
@@ -11,6 +12,20 @@ export default function FormRegister(props) {
         handleSignUp(values);
         props.history.push("/home");
     }
+
+    const SignupSchema = Yup.object().shape({
+        name: Yup.string()
+            .min(2, 'Too Short!')
+            .max(70, 'Too Long!')
+            .required('Required'),
+        email: Yup.string()
+            .email('Invalid email')
+            .required('Required'),
+        password: Yup.string()
+            .min(2, 'Too Short!')
+            .max(70, 'Too Long!')
+            .required('Required'),
+    });
 
     const formik = useFormik({
         initialValues: {
@@ -24,13 +39,15 @@ export default function FormRegister(props) {
                 return
             };
             changePage(values);
-        }
+        },
+        // validationSchema: { SignupSchema }
     });
 
     return (
         <>
             <form onSubmit={formik.handleSubmit}>
                 <Input
+
                     placeholder="Name"
                     name="name"
                     type="text"

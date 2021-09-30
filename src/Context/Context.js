@@ -19,6 +19,15 @@ export function MyProvider({ children }) {
 
     useEffect(() => setLoading(false));
 
+    const updateInfo = (response) => {
+        console.log(response)
+
+        setUser(response.user || []);
+        setMovieOnCart(response.cart || [])
+        setMovieOnHistory(response.history || [])
+        setWishList(response.wishList || [])
+    }
+
     // ------------------------- Login -------------------------
     const handleLogin = async (values) => {
         const userLogin = {
@@ -26,21 +35,19 @@ export function MyProvider({ children }) {
             password: values.password
         }
 
-        await api.post("/login", { userLogin })
+        await api.post("/login", { userLogin, user })
             .then(response => {
 
-                if (response.data.length == 0) {
+                if (response.data == 0) {
                     setAuthenticated(false);
                     return
                 };
                 setAuthenticated(true);
-                setUser(response);
+                updateInfo(response.data);
             });
 
         setLoading(false)
-
         // criar validações
-        // chamar no button do login/signup
     }
 
     // ------------------------- Logout -------------------------
@@ -71,11 +78,13 @@ export function MyProvider({ children }) {
             });
 
         // criar validações
-        // chamar no button do login/signup
     }
 
     // ------------------------- cart movie -------------------------
     const setAddMovie = async (movie) => {
+        if(movie == []){
+            return
+        }
 
         setMovieOnCart((prevState) => {
             if (prevState.find((film) => film.id === movie.id)) {
@@ -85,26 +94,28 @@ export function MyProvider({ children }) {
         });
 
         if (CartMovie.length == 0) {
-            return console.log("vazio")
+            return
         }
 
-        console.log(CartMovie)
         api.post("/cart", { CartMovie, user })
             .then(response => {
                 if (response.data.length == 0) {
                     return
                 };
-                console.log("adicionado ao carrinho!");
+
             });
     };
 
     const setRemoveMovie = (movie) => {
+        if(movie == []){
+            return
+        }
         setMovieOnCart((prevState) => {
             return prevState.filter((element) => element.id !== movie.id);
         });
 
         if (CartMovie.length == 0) {
-            return console.log("vazio")
+            return
         }
 
         api.post("/cart/remove", { CartMovie, user })
@@ -112,7 +123,7 @@ export function MyProvider({ children }) {
                 if (response.data.length == 0) {
                     return
                 };
-                console.log("removido do carrinho!");
+
             });
     };
 
@@ -123,6 +134,9 @@ export function MyProvider({ children }) {
     // ------------------------- wishlist -------------------------
 
     const setAddWish = (movie) => {
+        if(movie == []){
+            return
+        }
         setWishList((prevState) => {
             if (prevState.find((film) => film.id === movie.id)) {
                 return prevState;
@@ -131,7 +145,7 @@ export function MyProvider({ children }) {
         });
 
         if (wishList.length == 0) {
-            return console.log("vazio")
+            return
         }
 
         api.post("/wishList", { wishList, user })
@@ -139,17 +153,20 @@ export function MyProvider({ children }) {
                 if (response.data.length == 0) {
                     return
                 };
-                console.log("adicionado a wishList!");
+
             });
     };
 
     const setRemoveWish = (movie) => {
+        if(movie == []){
+            return
+        }
         setWishList((prevState) => {
             return prevState.filter((element) => element.id !== movie.id)
         });
 
         if (wishList.length == 0) {
-            return console.log("vazio")
+            return
         }
 
         api.post("/wishList/remove", { wishList, user })
@@ -157,19 +174,22 @@ export function MyProvider({ children }) {
                 if (response.data.length == 0) {
                     return
                 };
-                console.log("removido da wishList!");
+
             });
     };
 
     // ------------------------- history -------------------------
 
     const setAddHistory = (movie) => {
+        if(movie == []){
+            return
+        }
         setMovieOnHistory((prevState) => {
             return prevState.concat(movie);
         });
 
         if (moviesOnHistory.length == 0) {
-            return console.log("vazio")
+            return
         }
 
         api.post("/history", { moviesOnHistory, user })
@@ -177,15 +197,18 @@ export function MyProvider({ children }) {
                 if (response.data.length == 0) {
                     return
                 };
-                console.log("adicionado ao historico");
+
             });
     };
 
     const setCleanHistory = (movie) => {
+        if(movie == []){
+            return
+        }
         setMovieOnHistory([]);
 
         if (moviesOnHistory.length == 0) {
-            return console.log("vazio")
+            return
         }
 
         api.post("/history/remove", { moviesOnHistory, user })
@@ -193,7 +216,7 @@ export function MyProvider({ children }) {
                 if (response.data.length == 0) {
                     return
                 };
-                console.log("removido do historico!");
+
             });
     }
 
@@ -216,6 +239,7 @@ export function MyProvider({ children }) {
                 user: null,
 
                 handleLogin,
+                handleLogout,
                 handleSignUp,
                 authenticated,
                 setAuthenticated,

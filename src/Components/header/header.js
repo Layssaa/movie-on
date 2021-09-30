@@ -9,11 +9,12 @@ import { useContext, useState } from "react";
 import { MyContext } from "../../Context/Context";
 
 export default function Header() {
-    const { setAuthenticated } = useContext(MyContext);
+    const { handleLogout } = useContext(MyContext);
     const history = useHistory();
     const [display, setDisplay] = useState(false);
 
     const goHome = () => {
+        handleLogout();
         history.push("/");
     };
 
@@ -30,7 +31,7 @@ export default function Header() {
     }
 
     const Exit = ()=>{
-        setAuthenticated(false)
+        handleLogout()
         setDisplay(false)
     }
 

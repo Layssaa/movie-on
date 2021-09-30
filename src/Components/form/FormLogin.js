@@ -26,7 +26,6 @@ export default function FormLogin(props) {
         <>
             <form onSubmit={formik.handleSubmit}>
                 <Input
-                    autocomplete="false"
                     id="email"
                     name="email"
                     placeholder="Email"
