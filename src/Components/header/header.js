@@ -1,21 +1,38 @@
 import { routers } from "../../router/Router";
 import { SecondaryLogo } from '../../Components/logo/logo';
-import { HeaderHome, Cart, Profile } from "./headerStyle";
+import { HeaderHome, Cart, Profile, Quit } from "./headerStyle";
 import Search from "../search/Search";
 import img from "../../images/small.png"
 import imgProfile from "../../images/user.png"
 import { useHistory } from "react-router-dom";
+import { useContext, useState } from "react";
+import { MyContext } from "../../Context/Context";
 
 export default function Header() {
+    const { setAuthenticated } = useContext(MyContext);
     const history = useHistory();
+    const [display, setDisplay] = useState(false);
 
-    const goHome = ()=>{
+    const goHome = () => {
         history.push("/");
     };
 
-    const goCart = ()=>{
+    const goCart = () => {
         history.push("/cart");
     };
+
+    const getOut = () => {
+        if (display) {
+            setDisplay(false)
+        } else {
+            setDisplay(true)
+        }
+    }
+
+    const Exit = ()=>{
+        setAuthenticated(false)
+        setDisplay(false)
+    }
 
     return (
         <>
@@ -34,7 +51,10 @@ export default function Header() {
                     })}
                 <Search />
                 <Cart onClick={goCart} src={img} />
-                <Profile src={imgProfile} />
+                <Profile onClick={getOut} src={imgProfile} />
+                {display && <Quit
+                    onClick={Exit}
+                >QUIT</Quit>}
             </HeaderHome>
         </>
     );

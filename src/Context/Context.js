@@ -218,6 +218,7 @@ export function MyProvider({ children }) {
                 handleLogin,
                 handleSignUp,
                 authenticated,
+                setAuthenticated,
 
                 loading
             }}
