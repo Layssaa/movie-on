@@ -8,8 +8,8 @@ import * as Yup from 'yup';
 export default function FormRegister(props) {
     const { handleSignUp } = useContext(MyContext);
 
-    const changePage = (values) => {
-        handleSignUp(values);
+    const changePage = async (values) => {
+       await handleSignUp(values);
         props.history.push("/home");
     }
 
