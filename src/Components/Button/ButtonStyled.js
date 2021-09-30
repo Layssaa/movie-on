@@ -41,3 +41,13 @@ export const ButtonForm = styled(ButtonDefault)`
     text-align:center;
     cursor:pointer;
 `
+
+export const ButtonPagination = styled(ButtonDefault)`
+    width: 2%;
+    height: 100%;
+    background: #121315;
+    box-shadow: -5px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    align-self:flex-end;
+
+`

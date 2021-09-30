@@ -23,9 +23,9 @@ export function MyProvider({ children }) {
         console.log(response)
 
         setUser(response.user || []);
-        setMovieOnCart(response.cart || [])
-        setMovieOnHistory(response.history || [])
-        setWishList(response.wishList || [])
+        setAddMovie(response.cart || [])
+        setAddHistory(response.history || [])
+        setAddWish(response.wishList || [])
     }
 
     // ------------------------- Login -------------------------

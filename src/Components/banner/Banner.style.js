@@ -10,8 +10,6 @@ export const Ban = styled.div`
     background-size: cover;
     background-position:center;
 
-    margin-bottom: 1%;
-
 `
 
 export const BanCategories = styled.div`

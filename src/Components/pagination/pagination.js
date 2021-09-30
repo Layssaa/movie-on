@@ -1,17 +1,40 @@
-const max_ITEMS = 9;
-const max_LEFT = (max_ITEMS - 1)/2;
+import { useState } from "react";
+import { ButtonPagination } from "../Button/ButtonStyled";
+import CardLetter from "../card/card";
+import { ButtonsChangePage, ListMovies } from "./pagination.style"
 
-export default function Pagination({limit, total, offset}){
-    const current = offset? (offset/limit) + 1:1;
-    const pages = Math.ceil(total/limit);
-    const first = Math.max(current - max_LEFT, 1);
+import Stack from '@mui/material/Stack';
+import Pagination from '@mui/material/Pagination';
 
-    return(
-        <ul>
-            {Array.from({length: max_ITEMS})
-            .map((_,index) => index + first )
-            .map(page =>{ <li><button>aa{page}</button></li> })
-            }
-        </ul>
+// const max_ITEMS = 4;
+// const max_LEFT = (max_ITEMS - 1) / 2;
+
+export default function HandlePagination(props) {
+    const [items, setItems] = useState(props.movieList);
+    const [itemsPerPage, setItemsPerPage] = useState(4);
+    const [currentPage, setCurrentPage] = useState(0);
+
+    const pages = Math.ceil(items.length / itemsPerPage);
+
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = items.slice(startIndex, endIndex)
+
+    return (
+        <>
+            <ListMovies>
+                {currentItems.map(item =>{
+                return <CardLetter key={item.index} element={item} {...props}/>
+                })}
+            </ListMovies>
+            <ButtonsChangePage>
+                {Array.from(Array(pages), (_, index) => {
+                    return (
+                    <ButtonPagination value={index} onClick={(e) => setCurrentPage(Number(e.target.value))}>{index + 1}</ButtonPagination>)
+                })
+                }
+            </ButtonsChangePage>
+
+        </>
     )
 }

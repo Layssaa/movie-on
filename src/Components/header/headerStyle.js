@@ -34,7 +34,7 @@ export const Profile = styled.img`
     height: 55%;;
     align-self:center;
     border-radius: 50px;
-    border: 3px solid #8850BF;
+    border: 3px solid #121315;
     cursor:pointer;
 `
 

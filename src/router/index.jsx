@@ -22,7 +22,6 @@ function CustomRoute(props) {
     if (props.isPrivate && !authenticated) {
         return <Redirect to="/login" exact />;
     }
-
     return <Route {...props} />;
 }
 

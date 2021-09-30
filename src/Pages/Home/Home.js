@@ -9,11 +9,12 @@ import { Dashboard } from '../../Components/card/card.style';
 import { MyContext } from "../../Context/Context"
 
 // -------------- paginação ----------------
-import Pagination from '../../Components/pagination/pagination';
+import HandlePagination from '../../Components/pagination/pagination';
 
 // import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { AddCart } from '../../Components/addCart/AddCart';
+import Footer from '../../Components/Footer/Footer';
 
 const KEY = "f93417762b0d5f1e87448cbe259e5b31";
 
@@ -44,7 +45,6 @@ export default function Home() {
 
       <Dashboard>
 
-        {/* <iframe className="initial-video" src="https://www.youtube.com/embed/6MRxT8kz30k?autoplay=1&mute=0&loop=1&showinfo=1&controls=0&modestbranding=1&autohide=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
         <Banner />
 
         {!movies ? <></> :
@@ -55,17 +55,14 @@ export default function Home() {
               )
             })
             }
-          </>)}
-
-        {/* <Stack>
-          <Pagination count={10} />
-          </Stack> */}
+          </>)
+        }
       </Dashboard>
-
-      {/* <Pagination limit={12} total={20} offset={10} /> */}
-      {/* {addCartFeedback && <AddCart />} */}
     </Main>
   )
 }
 
-{/* <iframe className="initial-video" src="https://www.youtube.com/embed/6MRxT8kz30k?autoplay=1&mute=0&loop=1&showinfo=1&controls=0&modestbranding=1&autohide=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */ }
+
+// (<>{
+//   <HandlePagination add={setAddCartFeedback} movieList={movies} onclick={goToSingleMovie} addMovie={setAddMovie} />
+// }</>)
