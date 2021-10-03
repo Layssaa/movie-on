@@ -5,7 +5,7 @@ import CartDiv from '../../Components/card/cardCart';
 import { MyContext } from "../../Context/Context";
 import { ProductDiv } from "../../Components/singleProduct/CardSingleProductStyle";
 import Button from "../../Components/Button/Button";
-import { ButtonCancel, H3 } from "../../Components/card/cardCart.style";
+import { ButtonCancel, FinalizeOrder, H3 } from "../../Components/card/cardCart.style";
 import { useHistory } from "react-router-dom";
 
 
@@ -50,11 +50,13 @@ export default function Cart() {
         <Main>
             <Header />
             <ProductDiv>
+                <FinalizeOrder>
                 {
                     CartMovie.map((element) => {
                         return <CartDiv key={element.id} removeMovie={removeMovie} movie={element} />
                     })
                 }
+                </FinalizeOrder>
                 <H3>R${total},00</H3>
                 <Button onClick={finalizedOrder}>FINALIZE ORDER</Button>
                 <ButtonCancel>CANCEL</ButtonCancel>

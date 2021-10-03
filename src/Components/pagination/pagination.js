@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ButtonPagination } from "../Button/ButtonStyled";
 import CardLetter from "../card/card";
 import { ButtonsChangePage, ListMovies } from "./pagination.style"
+import CartDiv from "../card/cardCart";
 
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
@@ -11,7 +12,7 @@ import Pagination from '@mui/material/Pagination';
 
 export default function HandlePagination(props) {
     const [items, setItems] = useState(props.movieList);
-    const [itemsPerPage, setItemsPerPage] = useState(4);
+    const [itemsPerPage, setItemsPerPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(0);
 
     const pages = Math.ceil(items.length / itemsPerPage);
@@ -24,7 +25,7 @@ export default function HandlePagination(props) {
         <>
             <ListMovies>
                 {currentItems.map(item =>{
-                return <CardLetter key={item.index} element={item} {...props}/>
+                return <CartDiv key={item.index} element={item} movie={item} {...props}/>
                 })}
             </ListMovies>
             <ButtonsChangePage>

@@ -33,7 +33,7 @@ export default function CardLetter(props) {
 
     }, [wishList]);
 
-    const liked = (movie) => {
+    const liked = () => {
         if (like) {
             setRemoveWish(movie);
             setLike(false);
@@ -44,12 +44,12 @@ export default function CardLetter(props) {
         };
     };
 
-    const goToMovie = (id) => {
-        props.onclick(id);
+    const goToMovie = () => {
+        props.onclick(movie.id);
     };
 
-    const addMovieOnCart = (film) => {
-        props.addMovie(film);
+    const addMovieOnCart = () => {
+        props.addMovie(movie);
         props.add(true);
         setTimeout(() => { props.add(false) }, 1500);
     };
@@ -57,13 +57,13 @@ export default function CardLetter(props) {
     return (
         <Card>
             <AudienceEvaluation>{movie.vote_average}</AudienceEvaluation>
-            <Img onClick={() => goToMovie(movie.id)} src={`${imgURL}${movie.poster_path}`} />
-            <p onClick={() => goToMovie(movie.id)}>{movie.title}</p>
+            <Img onClick={goToMovie} src={`${imgURL}${movie.poster_path}`} />
+            <p onClick={goToMovie}>{movie.title}</p>
             <p>R$ {Number(movie.vote_average) * 10},00</p>
             <ButtonsAction>
-                <ButtonsMovies onClick={() => goToMovie(movie.id)}> <Icon src={play} /> </ButtonsMovies>
-                <ButtonsMovies onClick={() => addMovieOnCart(movie)}> <Icon src={cart} /> </ButtonsMovies>
-                <MovieHeart onClick={() => liked(movie)} src={like ? heartLike : heart} />
+                <ButtonsMovies onClick={goToMovie}> <Icon src={play} /> </ButtonsMovies>
+                <ButtonsMovies onClick={addMovieOnCart}> <Icon src={cart} /> </ButtonsMovies>
+                <MovieHeart onClick={liked} src={like ? heartLike : heart} />
             </ButtonsAction>
         </Card>
     )

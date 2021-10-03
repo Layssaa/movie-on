@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { array } from "yup";
 import api from "../services/api"
 
 export const MyContext = React.createContext({
@@ -19,41 +20,72 @@ export function MyProvider({ children }) {
 
     useEffect(() => setLoading(false));
 
-    const updateInfo = (response) => {
-        console.log(response)
-
-        setUser(response.user || []);
-        setAddMovie(response.cart || [])
-        setAddHistory(response.history || [])
-        setAddWish(response.wishList || [])
-    }
-
     // ------------------------- Login -------------------------
     const handleLogin = async (values) => {
-        
+
         const userLogin = {
             email: values.email,
             password: values.password
         }
 
-        await api.post("/login", { userLogin, user })
-            .then(response => {
+        const response = await api.post("/login", { userLogin, user });
+        console.log("resposta server")
+        console.log(response)
 
-                if (response.data == 0) {
-                    setAuthenticated(false);
-                    return
-                };
-                setAuthenticated(true);
-                updateInfo(response.data);
+        if (response.data == 0) {
+            setAuthenticated(false);
+            return
+        };
+
+        setAuthenticated(true);
+        setUser(response.data.user || []);
+
+        response.data.cart.forEach(element => {
+            if (element.length == 0) {
+                return setAddMovie([]);
+            }
+
+            const movieList = element.data;
+
+            movieList.forEach(unity => {
+                setAddMovie(unity || []);
+            });
+        });
+
+        response.data.history.forEach(element => {
+            if (element.length == 0) {
+                return setAddHistory([]);
+            }
+
+            const movieList = element.data;
+
+            movieList.forEach(unity => {
+                setAddHistory(unity || []);
+            });
+        });
+
+        response.data.wishlist.forEach(element => {
+            if (element.length == 0) {
+                return setAddWish([]);
+            }
+
+            const movieList = element.data;
+
+            movieList.forEach(unity => {
+                setAddWish(unity || []);
             });
 
-        setLoading(false)
-        // criar validações
+            setLoading(false)
+        });
+
     }
 
     // ------------------------- Logout -------------------------
     const handleLogout = async () => {
         setUser({ email: "", password: "" });
+        setMovieOnCart([]);
+        setWishList([]);
+        setMovieOnHistory([]);
         setAuthenticated(false);
     }
 
@@ -78,20 +110,34 @@ export function MyProvider({ children }) {
                 setUser(response);
             });
 
-        // criar validações
     }
 
     // ------------------------- cart movie -------------------------
     const setAddMovie = async (movie) => {
-        if(movie == []){
+        console.log("-----------MOVIE-----------------")
+        // da requisição recebe um array
+        // do front end recebe um objeto
+
+        let movieObject;
+        if (!movie.length) {
+            console.log("é objeto")
+            movieObject = movie
+        } else {
+            console.log("é array")
+            movieObject = movie[0]
+        }
+
+        console.log(movieObject)
+
+        if (movie == []) {
             return
         }
 
         setMovieOnCart((prevState) => {
-            if (prevState.find((film) => film.id === movie.id)) {
+            if (prevState.find((film) => film.id === movieObject.id)) {
                 return prevState
             };
-            return prevState.concat(movie);
+            return prevState.concat(movieObject);
         });
 
         if (CartMovie.length == 0) {
@@ -105,10 +151,13 @@ export function MyProvider({ children }) {
                 };
 
             });
+
+        console.log("adicionado no carrinho")
+        console.log(CartMovie)
     };
 
     const setRemoveMovie = (movie) => {
-        if(movie == []){
+        if (movie == []) {
             return
         }
         setMovieOnCart((prevState) => {
@@ -135,7 +184,7 @@ export function MyProvider({ children }) {
     // ------------------------- wishlist -------------------------
 
     const setAddWish = (movie) => {
-        if(movie == []){
+        if (movie == []) {
             return
         }
         setWishList((prevState) => {
@@ -156,10 +205,12 @@ export function MyProvider({ children }) {
                 };
 
             });
+        console.log("adicionado wishList")
+        console.log(wishList)
     };
 
     const setRemoveWish = (movie) => {
-        if(movie == []){
+        if (movie == []) {
             return
         }
         setWishList((prevState) => {
@@ -175,14 +226,13 @@ export function MyProvider({ children }) {
                 if (response.data.length == 0) {
                     return
                 };
-
             });
     };
 
     // ------------------------- history -------------------------
 
     const setAddHistory = (movie) => {
-        if(movie == []){
+        if (movie == []) {
             return
         }
         setMovieOnHistory((prevState) => {
@@ -200,12 +250,16 @@ export function MyProvider({ children }) {
                 };
 
             });
+
+        console.log("adicionado history")
+        console.log(moviesOnHistory)
     };
 
     const setCleanHistory = (movie) => {
-        if(movie == []){
+        if (movie == []) {
             return
         }
+
         setMovieOnHistory([]);
 
         if (moviesOnHistory.length == 0) {

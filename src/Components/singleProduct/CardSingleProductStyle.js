@@ -11,6 +11,7 @@ export const ProductDiv = styled(Dashboard)`
     border-radius: 6px;
 
     margin-top:5%;
+    padding: 10px 5px;
 
 `
 

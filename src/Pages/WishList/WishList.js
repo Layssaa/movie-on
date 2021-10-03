@@ -5,7 +5,6 @@ import { useContext, useState } from "react"
 import { MyContext } from "../../Context/Context"
 import CardLetter from '../../Components/card/card';
 import { useHistory } from 'react-router';
-import HandlePagination from '../../Components/pagination/pagination';
 
 export default function WishList() {
     const [addCartFeedback, setAddCartFeedback] = useState(false);
