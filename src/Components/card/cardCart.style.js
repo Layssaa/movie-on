@@ -70,15 +70,16 @@ export const FinalizeOrder = styled(ProductDiv)`
       }
 
     &::-webkit-scrollbar-track {
-        background: #1F1F21;    
+        background: none;    
         border-radius: 20px;   
     }
 
     &::-webkit-scrollbar-thumb {
         background-color: #141416;    
         border-radius: 20px;      
-        border: 3px solid #474545;  
+        border: 3px solid #23242C;  
+
     }
-      
+    
 
 `;

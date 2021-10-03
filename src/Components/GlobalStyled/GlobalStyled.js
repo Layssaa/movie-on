@@ -21,6 +21,21 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #191A1F;
   }
 
+  body::-webkit-scrollbar {
+    width: 12px;              
+  }
+
+  body::-webkit-scrollbar-track {
+      background: none;    
+      border-radius: 20px;   
+  }
+
+  body::-webkit-scrollbar-thumb {
+      background-color: #141416;    
+      border-radius: 20px;      
+      border: 3px solid #191A1F;  
+  }
+
   form {
     display:flex;
     flex-direction: column;

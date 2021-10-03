@@ -24,4 +24,6 @@ export const Main = styled(Flex)`
         margin-top: 0.5%;
         height: fit-content;
     }
+
+  
 `
