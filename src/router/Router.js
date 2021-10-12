@@ -5,7 +5,6 @@ import History from "../Pages/History/History";
 import Cart from "../Pages/Cart/Cart";
 import SingleProduct from "../Pages/SingleProduct/SingleProduct";
 import Login from "../Pages/Login/Login";
-import Register from "../Pages/Register/Register";
 import Initial from "../Pages/Initial/Initial";
 import CategorieList from "../Pages/categorieList/CategorieList";
 import Finished from "../Pages/orderplaced/orderPlaced";
@@ -32,13 +31,6 @@ export const routers = [
         path: "/finished",
         isVisible: false,
         isPrivate: true
-    },
-    {
-        name: "register",
-        Component: Register,
-        path: "/register",
-        isVisible: false,
-        isPrivate: false
     },
     {
         name: "login",

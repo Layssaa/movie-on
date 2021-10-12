@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const FeedbackSpan = styled.div`
-    position: absolute;
 
     display:flex;
     justify-content:center;

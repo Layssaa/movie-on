@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ButtonTrash = styled.div`
-    position: absolute;
+position:fixed;
 
     display:flex;
     justify-content:center;
@@ -22,6 +22,6 @@ export const ButtonTrash = styled.div`
 `
 
 export const Trash = styled.img`
-    width: 65%;
-    height: 62%;
+    width: 70%;
+    height: 70%;
 `

@@ -68,3 +68,5 @@ export default function CardLetter(props) {
         </Card>
     )
 }
+
+// exports.CardLetter = CardLetter;

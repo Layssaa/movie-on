@@ -10,8 +10,6 @@ import { BrowserRouter, useRouteMatch, Link, Switch, Route } from "react-router-
 import { Logo } from "../../Components/logo/logo";
 import img from "../../images/Logo-main.png";
 
-import api from "../../services/api";
-
 export default function Login() {
     const [control, setControl] = useState(0);
 

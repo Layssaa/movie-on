@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { MyProvider } from "../../Context/Context";
+import { CartMovie } from "../../Context/Context"
 
 export const renderWithProviders = (children) => {
 
@@ -9,14 +10,5 @@ export const renderWithProviders = (children) => {
   // const setRemoveMovie = jest.fn();
   // const setCleanMovie = jest.fn();
 
-  return render(<MyProvider
-    value={
-      {
-        CartMovie,
-        setAddMovie,
-        setRemoveMovie,
-        setCleanMovie
-      }
-    }
-  >{children}</MyProvider>);
+  return render(<MyProvider>{children}</MyProvider>);
 };

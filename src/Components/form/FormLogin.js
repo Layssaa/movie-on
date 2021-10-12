@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import React, { useContext } from "react";
 import { ButtonForm } from "../Button/ButtonStyled";
 import { MyContext } from "../../Context/Context";
+import gif from "../../images/gif/completed.gif"
 
 export default function FormLogin(props) {
 
@@ -21,6 +22,10 @@ export default function FormLogin(props) {
             changePage(values);
         }
     });
+
+    if(loading){
+        return <img src={gif} />
+    }
 
     return (
         <>

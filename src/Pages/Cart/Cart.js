@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 
 export default function Cart() {
-    const { CartMovie, setAddMovie, setRemoveMovie, setAddHistory, setCleanMovie } = useContext(MyContext);
+    const { CartMovie, setRemoveMovie, setAddHistory } = useContext(MyContext);
     const [total, setTotal] = useState(0);
     const history = useHistory();
 
@@ -28,16 +28,15 @@ export default function Cart() {
         });
     }, [CartMovie]);
 
-    const finalizedOrder = () => {
+    const finalizedOrder = async () => {
+        await setAddHistory(CartMovie);
         history.push("/finished");
-        setAddHistory(CartMovie);
-        setCleanMovie();
     };
 
     if (total == 0) {
         return (
             <Main>
-                <Header/>
+                <Header />
                 <ProductDiv>
                     <h3>Vazio</h3>
                 </ProductDiv>
@@ -51,11 +50,11 @@ export default function Cart() {
             <Header />
             <ProductDiv>
                 <FinalizeOrder>
-                {
-                    CartMovie.map((element) => {
-                        return <CartDiv key={element.id} removeMovie={removeMovie} movie={element} />
-                    })
-                }
+                    {
+                        CartMovie.map((element) => {
+                            return <CartDiv key={element.id} removeMovie={removeMovie} movie={element} />
+                        })
+                    }
                 </FinalizeOrder>
                 <H3>R${total},00</H3>
                 <Button onClick={finalizedOrder}>FINALIZE ORDER</Button>

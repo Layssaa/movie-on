@@ -1,6 +1,5 @@
 import { ListMovie, ImgMovieCart, ImgTrash } from "./cardCart.style";
 import trash from "../../images/trash.png"
-import HandlePagination from "../pagination/pagination";
 
 const imgURL = "https://image.tmdb.org/t/p/w200";
 

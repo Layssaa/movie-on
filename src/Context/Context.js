@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { array } from "yup";
 import api from "../services/api"
+import { CartRemove_REQ, Cart_REQ, HistoryClear_REQ, History_REQ, Login_REQ, SingUp_REQ, WishListRemove_REQ, WishList_REQ } from "./SERVER_Requests"
 
 export const MyContext = React.createContext({
     id: null,
@@ -28,9 +29,7 @@ export function MyProvider({ children }) {
             password: values.password
         }
 
-        const response = await api.post("/login", { userLogin, user });
-        console.log("resposta server")
-        console.log(response)
+        const response = await Login_REQ(userLogin, user);
 
         if (response.data == 0) {
             setAuthenticated(false);
@@ -77,7 +76,7 @@ export function MyProvider({ children }) {
 
             setLoading(false)
         });
-
+        console.log(response)
     }
 
     // ------------------------- Logout -------------------------
@@ -91,7 +90,6 @@ export function MyProvider({ children }) {
 
     // ------------------------- Sign Up -------------------------
     const handleSignUp = async (values) => {
-
         const userSignUp = {
             name: values.name,
             email: values.email,
@@ -99,35 +97,29 @@ export function MyProvider({ children }) {
             repeatpassword: values.repeatpassword
         }
 
-        await api.post("/login/signup", { userSignUp })
-            .then(response => {
-                if (response.data.length == 0) {
-                    setAuthenticated(false);
-                    return
-                };
+        const response = await SingUp_REQ(userSignUp)
 
-                setAuthenticated(true);
-                setUser(response);
-            });
+        if (response.data.length == 0) {
+            setAuthenticated(false);
+            return
+        };
+
+        setAuthenticated(true);
+        setUser(response);
+
 
     }
 
     // ------------------------- cart movie -------------------------
     const setAddMovie = async (movie) => {
-        console.log("-----------MOVIE-----------------")
-        // da requisição recebe um array
-        // do front end recebe um objeto
 
         let movieObject;
+
         if (!movie.length) {
-            console.log("é objeto")
             movieObject = movie
         } else {
-            console.log("é array")
             movieObject = movie[0]
         }
-
-        console.log(movieObject)
 
         if (movie == []) {
             return
@@ -144,19 +136,10 @@ export function MyProvider({ children }) {
             return
         }
 
-        api.post("/cart", { CartMovie, user })
-            .then(response => {
-                if (response.data.length == 0) {
-                    return
-                };
-
-            });
-
-        console.log("adicionado no carrinho")
-        console.log(CartMovie)
+        const response = await Cart_REQ(CartMovie, user)
     };
 
-    const setRemoveMovie = (movie) => {
+    const setRemoveMovie = async (movie) => {
         if (movie == []) {
             return
         }
@@ -167,14 +150,7 @@ export function MyProvider({ children }) {
         if (CartMovie.length == 0) {
             return
         }
-
-        api.post("/cart/remove", { CartMovie, user })
-            .then(response => {
-                if (response.data.length == 0) {
-                    return
-                };
-
-            });
+        const response = await CartRemove_REQ(CartMovie, user);
     };
 
     const setCleanMovie = () => {
@@ -183,7 +159,7 @@ export function MyProvider({ children }) {
 
     // ------------------------- wishlist -------------------------
 
-    const setAddWish = (movie) => {
+    const setAddWish = async (movie) => {
         if (movie == []) {
             return
         }
@@ -198,15 +174,7 @@ export function MyProvider({ children }) {
             return
         }
 
-        api.post("/wishList", { wishList, user })
-            .then(response => {
-                if (response.data.length == 0) {
-                    return
-                };
-
-            });
-        console.log("adicionado wishList")
-        console.log(wishList)
+        const response = await WishList_REQ(wishList, user)
     };
 
     const setRemoveWish = (movie) => {
@@ -221,58 +189,25 @@ export function MyProvider({ children }) {
             return
         }
 
-        api.post("/wishList/remove", { wishList, user })
-            .then(response => {
-                if (response.data.length == 0) {
-                    return
-                };
-            });
+        const response = WishListRemove_REQ(wishList, user)
+
     };
 
     // ------------------------- history -------------------------
 
-    const setAddHistory = (movie) => {
-        if (movie == []) {
-            return
-        }
-        setMovieOnHistory((prevState) => {
-            return prevState.concat(movie);
-        });
+    const setAddHistory = async (movie) => {
 
-        if (moviesOnHistory.length == 0) {
-            return
-        }
-
-        api.post("/history", { moviesOnHistory, user })
-            .then(response => {
-                if (response.data.length == 0) {
-                    return
-                };
-
-            });
-
-        console.log("adicionado history")
+        setMovieOnHistory(CartMovie);
         console.log(moviesOnHistory)
+
+        const response = await History_REQ(moviesOnHistory, user);
+        setCleanMovie()
+
     };
 
-    const setCleanHistory = (movie) => {
-        if (movie == []) {
-            return
-        }
-
+    const setCleanHistory = async () => {
         setMovieOnHistory([]);
-
-        if (moviesOnHistory.length == 0) {
-            return
-        }
-
-        api.post("/history/remove", { moviesOnHistory, user })
-            .then(response => {
-                if (response.data.length == 0) {
-                    return
-                };
-
-            });
+        const response = await HistoryClear_REQ(moviesOnHistory, user)
     }
 
     return (

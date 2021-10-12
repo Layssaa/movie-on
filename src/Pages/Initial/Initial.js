@@ -1,6 +1,5 @@
 import gif from "../../images/gif/completed.gif";
 import Button from "../../Components/Button/Button";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Footer from "../../Components/Footer/Footer";
 import { useHistory } from "react-router-dom";
@@ -9,21 +8,16 @@ import { Wallpaper } from "../../Components/wallpaper/wallpaper";
 import { Main } from "../../Components/main/main";
 import { Carousel } from "../../Components/carousel/Carousel";
 import { Logo } from "../../Components/logo/logo";
+import { REQ_MOVIES_INITIAL } from "../../Service_API/SERVER_request"
 
 const imgURL = "https://image.tmdb.org/t/p/w200";
-const KEY = "f93417762b0d5f1e87448cbe259e5b31";
-
-const getMovies = async () => {
-    const response = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&sort_by=popularity.desc`);
-    return response.data.results;
-};
 
 export default function Initial() {
     const [popularMovies, setPopularMovies] = useState([]);
 
     useEffect(() => {
         (async () => {
-            setPopularMovies(await getMovies());
+            setPopularMovies(await REQ_MOVIES_INITIAL.getMoviesInitial());
         })();
     }, []);
 
