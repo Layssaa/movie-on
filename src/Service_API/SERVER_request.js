@@ -21,12 +21,14 @@ export const REQ_MOVIES_POPULAR = {
 // ------------------- ONLY MOVIE SCREEN -------------------
 export const REQ_MOVIES_ONLY = {
     async getMovie(movie_id) {
-        try {
+        // try {
+            console.log("movie_id")
+            console.log(movie_id)
             const response = await axios.get(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${KEY}&language=en-US`)
             return response.data
-        } catch {
-            return false
-        }
+        // } catch {
+            // return false
+        // }
     }
 }
 

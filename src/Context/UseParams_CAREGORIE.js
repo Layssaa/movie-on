@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router";
 
-export default async function USE_PARAMS_CATEGORIE() {
-    const { name } = await useParams();
+export default function USE_PARAMS_CATEGORIE() {
+    const { name } =  useParams();
     return name
 }

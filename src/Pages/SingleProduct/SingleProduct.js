@@ -11,11 +11,11 @@ import USE_PARAMS_ID_MOVIE from "../../Context/UseParams_SingleProduct";
 export default function SingleProduct() {
     const { setAddMovie } = useContext(MyContext);
     const [movie, setMovie] = useState();
-    const [credit, setCredit]=useState();
-    const id = USE_PARAMS_ID_MOVIE();
+    const [credit, setCredit] = useState();
+    const id  = USE_PARAMS_ID_MOVIE();
 
     useEffect(() => {
-        (async ()=>{
+        (async () => {
             setMovie(await REQ_MOVIES_ONLY.getMovie(id));
             setCredit(await REQ_MOVIES_CREDIT.getCredit(id));
         })()
