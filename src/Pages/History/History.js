@@ -7,7 +7,6 @@ import { Trash, ButtonTrash } from '../../Components/card/cardHistory.style';
 import trashClose from "../../images/trash-close-2.png"
 import trashOpen from "../../images/trash-open.png"
 
-
 import { MyContext } from "../../Context/Context"
 import React, { useContext, useState } from 'react';
 

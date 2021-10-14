@@ -1,3 +1,4 @@
+import React from "react";
 import img_Secondary from "../../images/Logo-Secondary.png";
 import { LogoImg, LogoImgSecondary } from "./logoStyle";
 

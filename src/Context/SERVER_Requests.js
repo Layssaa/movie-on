@@ -24,8 +24,8 @@ export const WishListRemove_REQ = async (wishList, user) => {
     return await api.post("/wishList/remove", { wishList, user });
 }
 
-export const History_REQ = async (CartMovie, user) => {
-    return await api.post("/history", { CartMovie, user });
+export const History_REQ = async (moviesOnHistory, user) => {
+    return await api.post("/history", { moviesOnHistory, user });
 }
 
 export const HistoryClear_REQ = async (moviesOnHistory, user) => {

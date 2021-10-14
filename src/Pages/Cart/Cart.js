@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React,{ useContext, useEffect, useState } from "react";
 import Header from '../../Components/header/header';
 import { Main } from '../../Components/main/main';
 import CartDiv from '../../Components/card/cardCart';
@@ -16,7 +16,7 @@ export default function Cart() {
 
     const removeMovie = (movie) => {
         setRemoveMovie(movie);
-    }
+    };
 
     useEffect(() => {
         setTotal(() => {
@@ -32,6 +32,10 @@ export default function Cart() {
         await setAddHistory(CartMovie);
         history.push("/finished");
     };
+
+    const cancel = ()=>{
+        history.push("/home");
+    }
 
     if (total == 0) {
         return (
@@ -58,7 +62,7 @@ export default function Cart() {
                 </FinalizeOrder>
                 <H3>R${total},00</H3>
                 <Button onClick={finalizedOrder}>FINALIZE ORDER</Button>
-                <ButtonCancel>CANCEL</ButtonCancel>
+                <ButtonCancel onClick={cancel}>CANCEL</ButtonCancel>
             </ProductDiv>
         </Main>
     )

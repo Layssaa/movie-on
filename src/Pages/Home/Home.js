@@ -35,7 +35,7 @@ export default function Home() {
           (<>
             {movies.map((element, index) => {
               return (
-                <CardLetter add={setAddCartFeedback} key={index} movie={element} onclick={goToSingleMovie} addMovie={setAddMovie} />
+                <CardLetter add={setAddCartFeedback} key={element.id} movie={element} onclick={goToSingleMovie} addMovie={setAddMovie} />
               )
             })
             }

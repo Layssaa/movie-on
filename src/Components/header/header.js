@@ -5,7 +5,7 @@ import Search from "../search/Search";
 import img from "../../images/small.png"
 import imgProfile from "../../images/user.png"
 import { useHistory } from "react-router-dom";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { MyContext } from "../../Context/Context";
 
 export default function Header() {
@@ -30,7 +30,7 @@ export default function Header() {
         }
     }
 
-    const Exit = ()=>{
+    const Exit = () => {
         handleLogout()
         setDisplay(false)
     }

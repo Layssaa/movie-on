@@ -1,3 +1,4 @@
+import React from "react"
 import { InputStyle, InputFlex } from "./InputStyle"
 
 export default function Input(props) {

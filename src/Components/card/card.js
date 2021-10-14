@@ -3,7 +3,7 @@ import play from "../../images/play_white.png"
 import cart from "../../images/cart.png"
 import heart from "../../images/heart.png"
 import heartLike from "../../images/heart_like.png"
-import { useContext, useEffect } from "react"
+import React, { useContext, useEffect } from "react"
 import { MyContext } from "../../Context/Context"
 
 import { ButtonsAction, ButtonsMovies, Img, MovieHeart, Icon, AudienceEvaluation } from "./card.style"
@@ -57,16 +57,14 @@ export default function CardLetter(props) {
     return (
         <Card>
             <AudienceEvaluation>{movie.vote_average}</AudienceEvaluation>
-            <Img onClick={goToMovie} src={`${imgURL}${movie.poster_path}`} />
+            <Img onClick={goToMovie} src={`${imgURL}${movie.poster_path}`} alt="Poster movie"/>
             <p onClick={goToMovie}>{movie.title}</p>
             <p>R$ {Number(movie.vote_average) * 10},00</p>
             <ButtonsAction>
-                <ButtonsMovies onClick={goToMovie}> <Icon src={play} /> </ButtonsMovies>
-                <ButtonsMovies onClick={addMovieOnCart}> <Icon src={cart} /> </ButtonsMovies>
-                <MovieHeart onClick={liked} src={like ? heartLike : heart} />
+                <ButtonsMovies onClick={goToMovie}> <Icon src={play} alt="Play button"/> </ButtonsMovies>
+                <ButtonsMovies onClick={addMovieOnCart}> <Icon src={cart} alt="Cart button"/> </ButtonsMovies>
+                <MovieHeart onClick={liked} alt="Like button" src={like ? heartLike : heart} />
             </ButtonsAction>
         </Card>
     )
 }
-
-// exports.CardLetter = CardLetter;

@@ -16,7 +16,7 @@ export function MyProvider({ children }) {
     const [CartMovie, setMovieOnCart] = useState([]);
     const [wishList, setWishList] = useState([]);
     const [moviesOnHistory, setMovieOnHistory] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({ email: "", password: "" });
 
     useEffect(() => setLoading(false));
@@ -52,15 +52,14 @@ export function MyProvider({ children }) {
         });
 
         response.data.history.forEach(element => {
-            if (element.length == 0) {
-                return setAddHistory([]);
-            }
 
             const movieList = element.data;
 
             movieList.forEach(unity => {
-                setAddHistory(unity || []);
+                setMovieOnHistory(prevState => prevState.concat(unity));
             });
+
+
         });
 
         response.data.wishlist.forEach(element => {
@@ -76,7 +75,8 @@ export function MyProvider({ children }) {
 
             setLoading(false)
         });
-        console.log(response)
+        console.log(response.data.cart)
+ 
     }
 
     // ------------------------- Logout -------------------------
@@ -98,15 +98,14 @@ export function MyProvider({ children }) {
         }
 
         const response = await SingUp_REQ(userSignUp)
-
+       
         if (response.data.length == 0) {
             setAuthenticated(false);
             return
         };
 
         setAuthenticated(true);
-        setUser(response);
-
+        setUser(response.data.id);
 
     }
 
@@ -198,9 +197,8 @@ export function MyProvider({ children }) {
     const setAddHistory = async (movie) => {
 
         setMovieOnHistory(CartMovie);
-        console.log(moviesOnHistory)
 
-        const response = await History_REQ(moviesOnHistory, user);
+        const response = await History_REQ(CartMovie, user);
         setCleanMovie()
 
     };

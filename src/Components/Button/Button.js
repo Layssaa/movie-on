@@ -1,3 +1,4 @@
+import React from 'react';
 import { ButtonInitial } from "./ButtonStyled"
 
 export default function Button(props) {

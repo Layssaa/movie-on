@@ -16,7 +16,7 @@ export default function CartDiv(props) {
                 <ImgMovieCart src={`${imgURL}${movie.poster_path}`} />
                 <h3>{movie.title}</h3>
                 <h3>R${Number(movie.vote_average)*10},00</h3>
-                <ImgTrash onClick={()=>{remove(movie)}} src={trash}/>
+                <ImgTrash onClick={()=>{remove(movie)}} src={trash} alt="trash"/>
             </ListMovie>
             </>
     )

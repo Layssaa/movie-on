@@ -1,31 +1,35 @@
-import 'regenerator-runtime/runtime'
-import { getMoviesMostPopular } from "../Pages/Home/Home"
-import { MOVIES } from "../data_tets/movies"
-import CardLetter from "../Components/card/card"
-import Home from "../Pages/Home/Home"
-import Header from "../Components/header/header"
-import { render } from "@testing-library/react"
-import { renderWithProviders } from './MyProvider/RenderMyProvider.test'
+import React from 'react';
+import 'regenerator-runtime/runtime';
+import { MOVIES } from "../data_tets/movies";
+import Home from "../Pages/Home/Home";
+import { fireEvent, act } from "@testing-library/react";
+import { renderWithProviders } from '../data_tets/MyProvider/RenderMyProvider';
+import { REQ_MOVIES_POPULAR } from "../Service_API/SERVER_request";
 
-jest.mock(getMoviesMostPopular);  
+jest.mock("../Service_API/SERVER_request");
 
 const RenderHome = () => {
     return renderWithProviders(<Home />);
 }
 
 describe("Home test", () => {
-
-
-    Home.setAddMovie.mockImplementation(() => []);
-    Home.goToSingleMovie.mockImplementation(() => []);
+    const Movie = MOVIES[0].results;
 
     beforeEach(() => {
-        getMoviesMostPopular.mockImplementation(() => MOVIES[0].results);
+        REQ_MOVIES_POPULAR.getMoviesMostPopular.mockImplementation(() => Movie);
     });
 
-    test("Test home card movie", async () => {
+    test("Test Home Page", async () => {
         const rendered = await RenderHome();
+        expect(REQ_MOVIES_POPULAR.getMoviesMostPopular).toHaveBeenCalledTimes(1);
+        rendered.getByText(Movie[0].title);
+    });
 
-    })
+    test("Test Home Page Add Cart", async () => {
+        const rendered = await RenderHome();
+        act(() => {
+            fireEvent.click(rendered.getAllByAltText("Cart button")[0]);
+        });
+    });
 
-})
+});

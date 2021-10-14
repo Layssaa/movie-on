@@ -1,3 +1,4 @@
+import React from 'react';
 import gif from "../../images/gif/completed.gif";
 import Button from "../../Components/Button/Button";
 import { useEffect, useState } from "react";

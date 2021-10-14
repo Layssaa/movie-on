@@ -28,7 +28,7 @@ export default function Product(props) {
                     <button onClick={() => { addMovie(movie) }} >WATCH</button>
 
                     <Price>${Number(movie.vote_average) * 10},00</Price>
-                    <Evaluation> 84% </Evaluation>
+                    <Evaluation> {Number(movie.vote_average) * 10}% </Evaluation>
                 </div>
             </Info>
         </ProductDiv>

@@ -1,4 +1,5 @@
-import { useParams, useHistory } from "react-router-dom";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import { Main } from "../../Components/main/main";
 import { useState, useEffect, useContext } from "react";
 import Header from "../../Components/header/header";
@@ -8,13 +9,13 @@ import { Load } from "../../Components/logo/Loading"
 import CardLetter from "../../Components/card/card";
 import { MyContext } from "../../Context/Context";
 import { REQ_MOVIES_WITH_CATEGORIES } from "../../Service_API/SERVER_request";
+import USE_PARAMS_CATEGORIE from "../../Context/UseParams_CAREGORIE";
 
 export default function CategorieList() {
     const { setAddMovie } = useContext(MyContext)
     const [listMovies, setMoviesList] = useState();
     const history = useHistory();
-    const categorieName = useParams();
-    const name = categorieName.name;
+    const name =  USE_PARAMS_CATEGORIE();
 
     const [addCartFeedback, setAddCartFeedback] = useState(false);
 

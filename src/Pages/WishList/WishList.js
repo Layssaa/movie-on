@@ -1,7 +1,7 @@
 import Header from '../../Components/header/header';
 import { Main } from '../../Components/main/main';
 import { Dashboard } from "../../Components/card/card.style"
-import { useContext, useState } from "react"
+import React, { useContext, useState } from "react"
 import { MyContext } from "../../Context/Context"
 import CardLetter from '../../Components/card/card';
 import { useHistory } from 'react-router';
