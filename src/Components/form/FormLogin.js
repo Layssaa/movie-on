@@ -13,13 +13,13 @@ export default function FormLogin(props) {
 
     const { handleLogin, loading } = useContext(MyContext);
 
-    const SignupSchema = Yup.object().shape({
-        email: Yup.string()
-            .email('Invalid email')
-            .required('Required'),
-        password: Yup.string()
-            .required('Required'),
-    });
+    // const SignupSchema = Yup.object().shape({
+    //     email: Yup.string()
+    //         .email('Invalid email')
+    //         .required('Required'),
+    //     password: Yup.string()
+    //         .required('Required'),
+    // });
 
     const changePage = async (values) => {
         await handleLogin(values);
@@ -28,7 +28,6 @@ export default function FormLogin(props) {
 
     const formik = useFormik({
         initialValues: { email: "", password: "" },
-        validationSchema: SignupSchema,
         onSubmit: values => {
             if (values.email === "" || values.password === "") {
                 return
@@ -36,7 +35,6 @@ export default function FormLogin(props) {
             changePage(values);
         }
     });
-    console.log(formik.errors)
 
     if (loading) {
         return <img src={gif} />
