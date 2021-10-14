@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ButtonTrash = styled.div`
-position:fixed;
+    position:fixed;
 
     display:flex;
     justify-content:center;

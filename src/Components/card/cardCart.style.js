@@ -26,7 +26,7 @@ export const ImgMovieCart = styled.img`
 export const ImgTrash = styled.img`
    width : 3%;
    height:25%;
-
+   cursor:pointer;
 `;
 
 export const ButtonCancel = styled(ButtonDefault)`
@@ -35,7 +35,6 @@ export const ButtonCancel = styled(ButtonDefault)`
     background: #191A1F;
     border-radius: 4px;
     font-size: 23px;
-
 
     &:hover{
         background: #1D1E24;

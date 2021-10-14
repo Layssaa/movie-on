@@ -31,7 +31,7 @@ function readTheFile(_filePath) {
 app.post("/login", async (req, res) => {
     const { userLogin } = req.body;
     let user;
-    console.log(userLogin)
+
     let data_USER = {
         user: 0,
         cart: [],
@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
 
             return result
         })
-        .catch(res => res.send(erro));
+        .catch(err => err);
 
     const CART = await readTheFile("./data/cart.json")
         .then(result => result.filter((element) => element.delete === false && (element.id === user[0].id)))
@@ -64,26 +64,26 @@ app.post("/login", async (req, res) => {
         .catch(res => []);
 
     const HISTORY = await readTheFile("./data/history.json")
-        .then(result => result.filter((element) => (element.id === user[0].id && element.delete === false)))
+        .then(result => result.filter((element) => (element.id === user[0].id)))
         .catch(res => []);
 
-        const HISTORY_FILTER = HISTORY.filter( element => element.delete === false)
+    const HISTORY_FILTER = HISTORY.filter(element => element.delete === false)
 
-        
+
     data_USER = {
         ...data_USER,
         cart: CART,
         wishlist: WISHLIST,
-        history: HISTORY_FILTER 
+        history: HISTORY_FILTER
     }
 
     res.send(data_USER)
 });
 
-// ------------------------------------ REGISTER - USER ------------------------------------
+// ------------------------------------ SIGNUP - REGISTER - USER ------------------------------------
 app.post("/login/signup", async (req, res) => {
     const { userSignUp } = req.body;
-    console.log(userSignUp)
+    console.log("CADASTRO");
 
     userSignUp.delete = false;
 
@@ -103,10 +103,19 @@ app.post("/login/signup", async (req, res) => {
             let data = result;
             userSignUp.id = data.length;
             let newList = data.concat(userSignUp);
+            console.log(userSignUp)
 
             fs.writeFile("./data/users.json", `${JSON.stringify(newList)}`, () => {
             });
-            return res.send("Cadastro feito com sucesso.");
+
+            let data_USER = {
+                id: userSignUp.id,
+                cart: [],
+                wishlist: [],
+                history: []
+            }
+            console.log(data_USER)
+            return res.send(data_USER);
         })
         .catch(erro => res.status(500).json({ message: erro.message }))
 });
@@ -212,23 +221,21 @@ app.post("/wishList/remove", async (req, res) => {
 
 // ------------------------------------ HISTORY - ADD  ------------------------------------
 app.post("/history", async (req, res) => {
-    const { CartMovie } = req.body;
+    const { moviesOnHistory } = req.body;
     const { user } = req.body;
 
     const data_USER = {
         id: user,
-        data: CartMovie,
+        data: moviesOnHistory,
         delete: false
     }
-
-    console.log(data_USER)
 
     readTheFile("./data/history.json")
         .then(result => result.concat(data_USER))
         .then(result => {
             fs.writeFile("./data/history.json", `${JSON.stringify(result)}`, () => {
             });
-       
+
             return res.send(result);
         })
         .catch(erro => res.status(500).json({ message: erro.message }))
@@ -238,7 +245,6 @@ app.post("/history", async (req, res) => {
 app.post("/history/remove", async (req, res) => {
     const { moviesOnHistory } = req.body;
     const { user } = req.body;
-    console.log("REMOVE MOVIE")
 
     const data_USER = {
         id: user,
@@ -250,7 +256,6 @@ app.post("/history/remove", async (req, res) => {
         .then(result => {
             const data = result.filter((element) => element.id !== data_USER.id);
             const data_FILTER = data.concat(data_USER);
-            console.log(data_FILTER);
 
             return data_FILTER
         })

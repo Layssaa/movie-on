@@ -3,7 +3,7 @@ import { SecondaryLogo } from '../../Components/logo/logo';
 import { HeaderHome, Cart, Profile, Quit } from "./headerStyle";
 import Search from "../search/Search";
 import img from "../../images/small.png"
-import imgProfile from "../../images/user.png"
+import imgProfile from "../../images/profile.png"
 import { useHistory } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import { MyContext } from "../../Context/Context";
@@ -14,8 +14,7 @@ export default function Header() {
     const [display, setDisplay] = useState(false);
 
     const goHome = () => {
-        handleLogout();
-        history.push("/");
+        history.push("/home");
     };
 
     const goCart = () => {
@@ -53,9 +52,7 @@ export default function Header() {
                 <Search />
                 <Cart onClick={goCart} src={img} />
                 <Profile onClick={getOut} src={imgProfile} />
-                {display && <Quit
-                    onClick={Exit}
-                >QUIT</Quit>}
+                <Quit onClick={Exit} open={display}>QUIT</Quit>
             </HeaderHome>
         </>
     );

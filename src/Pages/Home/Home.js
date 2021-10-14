@@ -6,7 +6,7 @@ import Banner from '../../Components/banner/Banner';
 import CardLetter from '../../Components/card/card';
 import { Dashboard } from '../../Components/card/card.style';
 import { MyContext } from "../../Context/Context";
-import { AddCart } from '../../Components/addCart/AddCart';
+import { AddCart, AddWishList } from '../../Components/addCart/AddCart';
 import { REQ_MOVIES_POPULAR } from '../../Service_API/SERVER_request';
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
         <Banner />
         {!movies ? <></> :
           (<>
-            {movies.map((element, index) => {
+            {movies.map((element) => {
               return (
                 <CardLetter add={setAddCartFeedback} key={element.id} movie={element} onclick={goToSingleMovie} addMovie={setAddMovie} />
               )
@@ -41,8 +41,8 @@ export default function Home() {
             }
           </>)
         }
-        {addCartFeedback ? <AddCart/> : null}
+         <AddCart open={addCartFeedback}/>
       </Dashboard>
     </Main>
-  )
-}
+  );
+};

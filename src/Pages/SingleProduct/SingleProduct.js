@@ -21,6 +21,8 @@ export default function SingleProduct() {
         })()
     }, []);
 
+    useEffect(()=> console.log(credit),[credit])
+
     if (!movie) {
         return (
             <Main>
@@ -33,7 +35,7 @@ export default function SingleProduct() {
     return (
         <Main>
             <Header />
-            <Product addMovie={setAddMovie} movie={movie} />
+            <Product addMovie={setAddMovie} movie={movie} cast={credit}/>
         </Main>
     )
 }

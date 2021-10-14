@@ -34,24 +34,30 @@ export const Profile = styled.img`
     height: 55%;;
     align-self:center;
     border-radius: 50px;
-    border: 3px solid #121315;
+    border: 2px solid #FFFFFF;
     cursor:pointer;
 `
 
 export const Quit = styled.div`
+    visibility: ${(props) => (props.open ? 'visible' : 'hidden')};
+    justify-content:center;
     position:absolute;
+
+    height: ${(props) => (props.open ? '30%' : '0')};
     width: 7%;
-    height: 30%;
     top:80%;
     right:3.5%;
-    font-size: 17px;
+
+    font-size: ${(props) => (props.open ? '17px' : '0')};
     cursor:pointer;
     text-align:center;
     background: #121316;
     border-radius: 4px;
     border: 1px solid #0B0B0C;
 
+    transition: all 0.5s ease-in-out;
+
     &:hover{
-        background: #101011;
+        background: #23242C;
     }
 `

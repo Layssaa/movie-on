@@ -30,13 +30,15 @@ export function MyProvider({ children }) {
         }
 
         const response = await Login_REQ(userLogin, user);
-
+        
+        if (response.data.user === 0) {
+            return
+        }
         if (response.data == 0) {
             setAuthenticated(false);
             return
         };
 
-        setAuthenticated(true);
         setUser(response.data.user || []);
 
         response.data.cart.forEach(element => {
@@ -75,16 +77,13 @@ export function MyProvider({ children }) {
 
             setLoading(false)
         });
-        console.log(response.data.cart)
- 
+
+        setAuthenticated(true);
     }
 
     // ------------------------- Logout -------------------------
     const handleLogout = async () => {
         setUser({ email: "", password: "" });
-        setMovieOnCart([]);
-        setWishList([]);
-        setMovieOnHistory([]);
         setAuthenticated(false);
     }
 
@@ -98,7 +97,7 @@ export function MyProvider({ children }) {
         }
 
         const response = await SingUp_REQ(userSignUp)
-       
+
         if (response.data.length == 0) {
             setAuthenticated(false);
             return

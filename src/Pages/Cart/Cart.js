@@ -1,4 +1,4 @@
-import React,{ useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from '../../Components/header/header';
 import { Main } from '../../Components/main/main';
 import CartDiv from '../../Components/card/cardCart';
@@ -7,15 +7,20 @@ import { ProductDiv } from "../../Components/singleProduct/CardSingleProductStyl
 import Button from "../../Components/Button/Button";
 import { ButtonCancel, FinalizeOrder, H3 } from "../../Components/card/cardCart.style";
 import { useHistory } from "react-router-dom";
+import { RemoveCart } from "../../Components/addCart/AddCart";
 
 
 export default function Cart() {
     const { CartMovie, setRemoveMovie, setAddHistory } = useContext(MyContext);
+    const [removed, setRemoved] = useState(false);
     const [total, setTotal] = useState(0);
     const history = useHistory();
 
     const removeMovie = (movie) => {
         setRemoveMovie(movie);
+        setRemoved(true);
+        setTimeout(() => {setRemoved(false) }, 1500);
+
     };
 
     useEffect(() => {
@@ -33,7 +38,7 @@ export default function Cart() {
         history.push("/finished");
     };
 
-    const cancel = ()=>{
+    const cancel = () => {
         history.push("/home");
     }
 
@@ -63,6 +68,7 @@ export default function Cart() {
                 <H3>R${total},00</H3>
                 <Button onClick={finalizedOrder}>FINALIZE ORDER</Button>
                 <ButtonCancel onClick={cancel}>CANCEL</ButtonCancel>
+                <RemoveCart open={removed} />
             </ProductDiv>
         </Main>
     )

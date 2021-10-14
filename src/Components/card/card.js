@@ -8,6 +8,7 @@ import { MyContext } from "../../Context/Context"
 
 import { ButtonsAction, ButtonsMovies, Img, MovieHeart, Icon, AudienceEvaluation } from "./card.style"
 import { useState } from "react"
+import { AddWishList } from "../addCart/AddCart"
 
 const imgURL = "https://image.tmdb.org/t/p/w200";
 
@@ -16,6 +17,7 @@ export default function CardLetter(props) {
     const movie = props.movie;
 
     const [like, setLike] = useState(false);
+    const [ feedback, setFeedback ] = useState(false);
 
 
     useEffect(() => {
@@ -37,11 +39,15 @@ export default function CardLetter(props) {
         if (like) {
             setRemoveWish(movie);
             setLike(false);
+            setFeedback(false);
         }
         else {
             setAddWish(movie);
             setLike(true);
+            setFeedback(true)
         };
+        
+        setTimeout(() => { setFeedback(false) }, 1500);
     };
 
     const goToMovie = () => {
@@ -54,17 +60,21 @@ export default function CardLetter(props) {
         setTimeout(() => { props.add(false) }, 1500);
     };
 
+
     return (
-        <Card>
-            <AudienceEvaluation>{movie.vote_average}</AudienceEvaluation>
-            <Img onClick={goToMovie} src={`${imgURL}${movie.poster_path}`} alt="Poster movie"/>
-            <p onClick={goToMovie}>{movie.title}</p>
-            <p>R$ {Number(movie.vote_average) * 10},00</p>
-            <ButtonsAction>
-                <ButtonsMovies onClick={goToMovie}> <Icon src={play} alt="Play button"/> </ButtonsMovies>
-                <ButtonsMovies onClick={addMovieOnCart}> <Icon src={cart} alt="Cart button"/> </ButtonsMovies>
-                <MovieHeart onClick={liked} alt="Like button" src={like ? heartLike : heart} />
-            </ButtonsAction>
-        </Card>
+        <>
+            <Card>
+                <AudienceEvaluation>{movie.vote_average}</AudienceEvaluation>
+                <Img onClick={goToMovie} src={`${imgURL}${movie.poster_path}`} alt="Poster movie" />
+                <p onClick={goToMovie}>{movie.title}</p>
+                <p>R$ {Number(movie.vote_average) * 10},00</p>
+                <ButtonsAction>
+                    <ButtonsMovies onClick={goToMovie}> <Icon src={play} alt="Play button" /> </ButtonsMovies>
+                    <ButtonsMovies onClick={addMovieOnCart}> <Icon src={cart} alt="Cart button" /> </ButtonsMovies>
+                    <MovieHeart onClick={liked} alt="Like button" src={like ? heartLike : heart} />
+                </ButtonsAction>
+            </Card>
+            <AddWishList open={feedback} />
+        </>
     )
 }

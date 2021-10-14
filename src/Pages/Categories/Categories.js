@@ -10,6 +10,7 @@ import { REQ_MOVIES_CATEGORIES } from '../../Service_API/SERVER_request';
 export default function Categories() {
     const [categories, setCategories] = useState([]);
 
+
     useEffect(() => {
         (async () => {
             setCategories(await REQ_MOVIES_CATEGORIES.getCategories());
@@ -25,12 +26,12 @@ export default function Categories() {
     return (
         <Main>
             <Header />
-        
+
             <Dashboard>
 
                 {categories.map((element) => {
                     return (
-                       
+
                         <CardCategories value={element.id} onclick={() => getList(element.id)} id={element.id} key={element.name} categorie={element.name}>
                             <p >{element.name}</p>
                         </CardCategories>
@@ -38,7 +39,6 @@ export default function Categories() {
                 })}
 
             </Dashboard>
-
         </Main >
     )
 }

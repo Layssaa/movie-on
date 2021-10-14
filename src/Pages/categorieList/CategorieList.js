@@ -50,6 +50,7 @@ export default function CategorieList() {
                         )
                     })
                 }
+                
             </Dashboard>
         </Main>
     )

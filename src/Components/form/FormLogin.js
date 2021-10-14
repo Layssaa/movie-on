@@ -19,11 +19,14 @@ export default function FormLogin(props) {
     const formik = useFormik({
         initialValues: { email: "", password: "" },
         onSubmit: values => {
+            if (values.email === "" || values.password === "") {
+                return
+            }
             changePage(values);
         }
     });
 
-    if(loading){
+    if (loading) {
         return <img src={gif} />
     }
 
