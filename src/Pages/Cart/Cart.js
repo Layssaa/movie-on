@@ -11,7 +11,7 @@ import { RemoveCart } from "../../Components/addCart/AddCart";
 
 
 export default function Cart() {
-    const { CartMovie, setRemoveMovie, setAddHistory } = useContext(MyContext);
+    const { CartMovie, setRemoveMovie, setAddHistory, setCleanMovie } = useContext(MyContext);
     const [removed, setRemoved] = useState(false);
     const [total, setTotal] = useState(0);
     const history = useHistory();
@@ -35,6 +35,7 @@ export default function Cart() {
 
     const finalizedOrder = async () => {
         await setAddHistory(CartMovie);
+        await setCleanMovie();
         history.push("/finished");
     };
 

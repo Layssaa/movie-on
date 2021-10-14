@@ -50,10 +50,6 @@ export default function FormRegister(props) {
 
     return (
         <>
-            {formik.errors.email && formik.touched.email ? (<>
-                <h1>{formik.errors.email}</h1>
-            </>
-            ) : null}
             <form onSubmit={formik.handleSubmit}>
                 <Input
                     placeholder="Name"

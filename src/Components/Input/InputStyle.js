@@ -23,7 +23,7 @@ export const InputStyle = styled.input`
         background: #1D1F26;
 
     }
-`
+`;
 
 export const InputFlex = styled(Flex)`
     width: 70%;
@@ -35,4 +35,17 @@ export const InputFlex = styled(Flex)`
         width: 20%;
         height: inherit;
     }
-`
+`;
+
+export const DivErro = styled.div`
+    display:flex;
+    width: 100%;
+    height:fit-content;
+    justify-content:space-evenly;
+`;
+
+export const MessageErro = styled.p`
+    font-size: 12px;
+    width: fit-content;
+    height: fit-content;
+`;

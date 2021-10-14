@@ -6,10 +6,20 @@ import React, { useContext } from "react";
 import { ButtonForm } from "../Button/ButtonStyled";
 import { MyContext } from "../../Context/Context";
 import gif from "../../images/gif/completed.gif"
+import * as Yup from 'yup';
+import { DivErro, MessageErro } from "../Input/InputStyle";
 
 export default function FormLogin(props) {
 
     const { handleLogin, loading } = useContext(MyContext);
+
+    const SignupSchema = Yup.object().shape({
+        email: Yup.string()
+            .email('Invalid email')
+            .required('Required'),
+        password: Yup.string()
+            .required('Required'),
+    });
 
     const changePage = async (values) => {
         await handleLogin(values);
@@ -18,6 +28,7 @@ export default function FormLogin(props) {
 
     const formik = useFormik({
         initialValues: { email: "", password: "" },
+        validationSchema: SignupSchema,
         onSubmit: values => {
             if (values.email === "" || values.password === "") {
                 return
@@ -25,6 +36,7 @@ export default function FormLogin(props) {
             changePage(values);
         }
     });
+    console.log(formik.errors)
 
     if (loading) {
         return <img src={gif} />
@@ -49,7 +61,16 @@ export default function FormLogin(props) {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                 />
-
+                <DivErro>
+                    {formik.errors.email && formik.touched.email ? (<>
+                        <MessageErro>{formik.errors.email}</MessageErro>
+                    </>
+                    ) : null}
+                    {formik.errors.password && formik.touched.password ? (<>
+                        <MessageErro>{formik.errors.password}</MessageErro>
+                    </>
+                    ) : null}
+                </DivErro>
                 <Text>Forgot your password?   <span>Click here.</span> </Text>
                 <TextCreatAcount><Link to={`login/signup`}>I don't have an account yet. </Link></TextCreatAcount>
 
