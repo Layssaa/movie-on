@@ -80,27 +80,6 @@ export default function FormRegister(props) {
                     value={formik.values.repeatpassword}
                 />
 
-                {formik.errors.name && formik.touched.name ? (<>
-                    <div>{formik.errors.name}</div>
-                    <ErrorMessage name="name" render={msg => <div>{msg}</div>} />
-                </>
-                ) : null}
-                {formik.errors.email && formik.touched.email ? (<>
-                    <div>{formik.errors.email}</div>
-                    <ErrorMessage name="email" />
-                </>
-                ) : null}
-                {formik.errors.password && formik.touched.password ? (<>
-                    <div>{formik.errors.password}</div>
-                    <ErrorMessage name="password" render={msg => <div>{msg}</div>} />
-                </>
-                ) : null}
-                {formik.errors.repeatpassword && formik.touched.repeatpassword ? (<>
-                    <div>{formik.errors.repeatpassword}</div>
-                    <ErrorMessage name="password" render={msg => <div>{msg}</div>} />
-                </>
-                ) : null}
-
                 <ButtonForm type="submit">START WATCHING</ButtonForm>
             </form>
         </>

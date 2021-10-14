@@ -61,7 +61,7 @@ export default function FormLogin(props) {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                 />
-                <DivErro>
+                {/* <DivErro>
                     {formik.errors.email && formik.touched.email ? (<>
                         <MessageErro>{formik.errors.email}</MessageErro>
                     </>
@@ -70,7 +70,7 @@ export default function FormLogin(props) {
                         <MessageErro>{formik.errors.password}</MessageErro>
                     </>
                     ) : null}
-                </DivErro>
+                </DivErro> */}
                 <Text>Forgot your password?   <span>Click here.</span> </Text>
                 <TextCreatAcount><Link to={`login/signup`}>I don't have an account yet. </Link></TextCreatAcount>
 
