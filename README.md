@@ -1,5 +1,5 @@
 # MOVIE - ON
-![Movie - ON]("./src/images/Logo-main.png")
+![Movie - ON](https://github.com/Layssaa/movie-on/blob/main/src/images/Logo-main.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
