@@ -15,8 +15,9 @@ export const FeedbackSpan = styled.div`
     height: 7%;
 
     background: #7F43BA;
-    border-radius: 6px;
+    border-radius: 0.9vh;
 
+    font-size: 3.5vh;
 `;
 
 export const SpanFeedback = styled.span`

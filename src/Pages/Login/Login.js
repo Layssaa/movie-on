@@ -1,12 +1,12 @@
 import { Main } from "../../Components/main/main";
 import Footer from "../../Components/Footer/Footer";
-import { Head, Form } from "../../Components/form/Form";
+import { Head, Form } from "../../Components/form/Form.style";
 import { Wallpaper } from "../../Components/wallpaper/wallpaper";
 import FormLogin from "../../Components/form/FormLogin";
 import FormRegister from "../../Components/form/FormRegister";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { BrowserRouter, useRouteMatch, Link, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import { Logo } from "../../Components/logo/logo";
 import img from "../../images/Logo-main.png";
 import RouteURL from "../../Context/UseRouteMatch";

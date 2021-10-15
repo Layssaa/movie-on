@@ -33,7 +33,7 @@ export default function Categories() {
                     return (
 
                         <CardCategories value={element.id} onclick={() => getList(element.id)} id={element.id} key={element.name} categorie={element.name}>
-                            <p >{element.name}</p>
+                           {element.name}
                         </CardCategories>
                     )
                 })}

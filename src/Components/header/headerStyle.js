@@ -11,7 +11,7 @@ export const HeaderHome = styled.header`
     p{
         width: 6%;
         height: 12%;
-        font-size: 20px;
+        font-size: 3.5vh;
         cursor:pointer;
     }
     
@@ -19,7 +19,7 @@ export const HeaderHome = styled.header`
         color: #EBCDFF ;
     }
 
-`
+`;
 
 export const Cart = styled.img`
     width: 2.4%;
@@ -27,16 +27,24 @@ export const Cart = styled.img`
     align-self:center;
     rigth: 3%;
     cursor:pointer;
-`
+
+    &:hover{
+        transform: scale(1.1)
+    }
+`;
 
 export const Profile = styled.img`
-    width: 4.2%;
-    height: 55%;;
+    width: 9vh;
+    height: 9vh;
     align-self:center;
-    border-radius: 50px;
+    border-radius: 20vh;
     border: 2px solid #FFFFFF;
     cursor:pointer;
-`
+
+    &:hover{
+        transform: scale(1.1)
+    }
+`;
 
 export const Quit = styled.div`
     visibility: ${(props) => (props.open ? 'visible' : 'hidden')};
@@ -48,7 +56,7 @@ export const Quit = styled.div`
     top:80%;
     right:3.5%;
 
-    font-size: ${(props) => (props.open ? '17px' : '0')};
+    font-size: ${(props) => (props.open ? '3vh' : '0')};
     cursor:pointer;
     text-align:center;
     background: #121316;
@@ -60,4 +68,4 @@ export const Quit = styled.div`
     &:hover{
         background: #23242C;
     }
-`
+`;

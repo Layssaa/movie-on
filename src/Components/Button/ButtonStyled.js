@@ -15,12 +15,12 @@ export const ButtonDefault = styled.button`
 `;
 
 export const ButtonInitial = styled(ButtonDefault)`
-    width: 30%;
+    width: 70vh;
     height: 10%;
     background-color: #8850BF;
     border-radius: 4px;
     color: #fff;
-    font-size: 23px;
+    font-size: 4vh;
     font-weight: 400;
     position: relative;
     z-index: 2;
@@ -35,7 +35,7 @@ export const ButtonForm = styled(ButtonDefault)`
     background-color: #8850BF;
     border-radius: 4px;
     color: #fff;
-    font-size: 23px;
+    font-size: 3.8vh;
     font-weight: 400;
     z-index: 2;
     text-align:center;

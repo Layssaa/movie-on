@@ -16,6 +16,9 @@ export const LogoImgSecondary = styled.img`
     cursor: pointer;
 `
 
+// width: 13vh;
+// height: 10vh;
+
 export const LogoImgFinished = styled.img`
     width: 15.5%;
     height:17%;

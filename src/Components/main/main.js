@@ -4,7 +4,7 @@ export const Flex = styled.div`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-`
+`;
 
 export const Main = styled(Flex)`
     display: flex;
@@ -17,13 +17,11 @@ export const Main = styled(Flex)`
     position: relative;
     z-index: 2;
     text-align:center;
-    gap:2%;
+    gap: 2%;
 
     h3{
-        font-size:25px;
+        font-size: 4.5vh;
         margin-top: 0.5%;
         height: fit-content;
     }
-
-  
-`
+`;

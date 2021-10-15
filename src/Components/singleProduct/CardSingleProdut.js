@@ -38,15 +38,16 @@ export default function Product(props) {
                 <span onClick={handleClick}>Cast</span>
                 <Cast open={open}>{
                     !cast ? <>Loading</> : cast.map(element => {
-                       if(element.profile_path === null){
-                           return
-                       }
+                        if (element.profile_path === null) {
+                            return
+                        }
                         return (
                             <CardCast>
-                                <Actors src={`${imgURL}${element.profile_path}`}/>
+                                <Actors src={`${imgURL}${element.profile_path}`} />
                                 <Name>{element.character} by {element.name}</Name>
                             </CardCast>
-                )})
+                        )
+                    })
                 }
                 </Cast>
                 <DivDefault>
@@ -55,8 +56,7 @@ export default function Product(props) {
                     <Price>${Number(movie.vote_average) * 10},00</Price>
                     <Evaluation> {Number(movie.vote_average) * 10}% </Evaluation>
                 </DivDefault>
-                {open?<Close onClick={handleClick}>X</Close>:<></>}
-
+                {open ? <Close onClick={handleClick}>X</Close> : <></>}
             </Info>
         </ProductDiv>
     )

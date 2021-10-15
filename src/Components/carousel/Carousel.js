@@ -14,5 +14,7 @@ export const Carousel = styled.div`
     img{
         margin: 0;
         padding: 0;
+        height: 50vh;
+        width: 30vh;
     }
 `

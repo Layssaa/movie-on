@@ -1,11 +1,11 @@
-import Input from "../Input/Input"
-import { Text, TextCreatAcount } from "./Form"
+import Input from "../Input/Input";
+import { Text, TextCreatAcount } from "./Form.style";
 import { Link } from "react-router-dom"
 import { useFormik } from 'formik';
 import React, { useContext } from "react";
 import { ButtonForm } from "../Button/ButtonStyled";
 import { MyContext } from "../../Context/Context";
-import gif from "../../images/gif/completed.gif"
+import gif from "../../images/gif/completed.gif";
 import * as Yup from 'yup';
 import { DivErro, MessageErro } from "../Input/InputStyle";
 

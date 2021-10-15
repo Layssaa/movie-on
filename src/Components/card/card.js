@@ -27,11 +27,11 @@ export default function CardLetter(props) {
                     return true
                 } else {
                     return false
-                }
+                };
 
             });
 
-        })()
+        })();
 
     }, [wishList]);
 
@@ -44,7 +44,7 @@ export default function CardLetter(props) {
         else {
             setAddWish(movie);
             setLike(true);
-            setFeedback(true)
+            setFeedback(true);
         };
         
         setTimeout(() => { setFeedback(false) }, 1500);
@@ -59,7 +59,6 @@ export default function CardLetter(props) {
         props.add(true);
         setTimeout(() => { props.add(false) }, 1500);
     };
-
 
     return (
         <>

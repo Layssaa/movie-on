@@ -1,5 +1,5 @@
 import { ListMovie, ImgMovieCart, ImgTrash } from "./cardCart.style";
-import trash from "../../images/trash.png"
+import trash from "../../images/trash.png";
 
 const imgURL = "https://image.tmdb.org/t/p/w200";
 
@@ -8,7 +8,7 @@ export default function CartDiv(props) {
 
     const remove = (id) => {
         props.removeMovie(id);
-    }
+    };
 
     return (
         <>
@@ -19,5 +19,5 @@ export default function CartDiv(props) {
                 <ImgTrash onClick={() => { remove(movie) }} src={trash} alt="trash" />
             </ListMovie>
         </>
-    )
-}
+    );
+};

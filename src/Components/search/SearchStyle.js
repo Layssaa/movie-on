@@ -4,10 +4,10 @@ export const SearchArea = styled.input`
     width: 18%;
     height: 30%;
     border: 1px solid #0E0E0E;
-    border-radius: 20px;
+    border-radius: 2.5vh;
     background: #121316;
     text-align:center;
-    box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0vh 0.5vh 0.13vh rgba(0, 0, 0, 0.25);
     margin-top: 1.1%;
 
     &:focus{

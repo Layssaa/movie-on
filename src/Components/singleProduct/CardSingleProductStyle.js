@@ -7,8 +7,8 @@ export const ProductDiv = styled(Dashboard)`
     flex-direction: row;
     justify-content:center;
     background: #23242C;
-    box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 6px;
+    box-shadow: -1.3vh 1.3vh 0.5vh rgba(0, 0, 0, 0.25);
+    border-radius:0.9vh;
 
     margin-top:5%;
     padding: 10px 5px;
@@ -33,6 +33,7 @@ export const Info = styled.div`
 
     h4{
         height: 30%;
+        font-size: 2.6vh;
     }
 
     span{
@@ -41,7 +42,7 @@ export const Info = styled.div`
         height: 6%;
         padding-left: 5%;
         border-radius: 4px;
-        transition: all 0.6s ease-in-out;
+        font-size: 2.8vh;
     }
 
     span:hover{
@@ -53,9 +54,11 @@ export const Info = styled.div`
         width: 30%;
         padding: 2% 5%;
         border:none;
-        border-radius: 4px;
+        border-radius: 0.7vh;
         background: #8850BF;
         cursor:pointer;
+
+        font-size: 3vh;
     }
 
     button:hover{
@@ -70,7 +73,7 @@ export const DivDefault = styled.div`
 `;
 
 export const PDefault = styled.p`
-    font-size: 14px;
+    font-size: 2.3vh;
     color: #D2D2D2;
     height: 7%;
 `;
@@ -78,22 +81,27 @@ export const PDefault = styled.p`
 export const Price = styled.h3`
     height: inherit;
     width: 20%;
-
 `;
 
-export const Evaluation = styled.h3`
+export const Evaluation = styled.p`
     position: absolute;
+    display:flex;
 
-    width: 5%;
-    height: 15%;
+    justify-content:center;
+    align-items:center;
+
+    width: 4.5%;
+    height:10%;
     top: 25%;
     right: 13%;
 
     padding: 1.2% 1%;
-    border-radius: 40px;
+    border-radius: 5.55vh;
     text-align:center;
     background: #8850BF;
-    box-shadow: -5px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: -1vh 0.5vh 0.5vh rgba(0, 0, 0, 0.25);
+
+    font-size: 4vh;
 `;
 
 export const Cast = styled.div`
@@ -146,7 +154,7 @@ export const Name = styled.p`
     margin-top: -15%;
     background: rgba(23, 23, 24, 0.5);
     text-align:center;
-    font-size: 14px;
+    font-size: 2.3vh;
     height: 20%;
     text-overflow: ellipsis;
 `;
@@ -163,4 +171,5 @@ export const Close = styled.p`
     z-index: 1000;
     cursor:pointer;
     font-weight: 100;
+    font-size: 3.2vh;
 `;

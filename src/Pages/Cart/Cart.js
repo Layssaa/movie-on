@@ -9,7 +9,6 @@ import { ButtonCancel, FinalizeOrder, H3 } from "../../Components/card/cardCart.
 import { useHistory } from "react-router-dom";
 import { RemoveCart } from "../../Components/addCart/AddCart";
 
-
 export default function Cart() {
     const { CartMovie, setRemoveMovie, setAddHistory, setCleanMovie } = useContext(MyContext);
     const [removed, setRemoved] = useState(false);
@@ -52,8 +51,8 @@ export default function Cart() {
                 </ProductDiv>
             </Main>
 
-        )
-    }
+        );
+    };
 
     return (
         <Main>

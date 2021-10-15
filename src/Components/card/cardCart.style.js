@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { ButtonDefault } from "../Button/ButtonStyled";
-import { ProductDiv } from "../singleProduct/CardSingleProductStyle"
+import { ProductDiv } from "../singleProduct/CardSingleProductStyle";
 
 export const ListMovie = styled.div`
     width : 90%;
     height:40%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 0.5px solid #676767;
     padding-bottom: 2%;
@@ -14,7 +14,7 @@ export const ListMovie = styled.div`
     h3{
         width : fit-content;
         height: 10%;
-        font-size: 20px;
+        font-size:3.5vh;
     }
 `;
 
@@ -34,7 +34,7 @@ export const ButtonCancel = styled(ButtonDefault)`
     height: 10%;
     background: #191A1F;
     border-radius: 4px;
-    font-size: 23px;
+    font-size: 4vh;
 
     &:hover{
         background: #1D1E24;
@@ -51,7 +51,7 @@ export const H3 = styled.span`
     text-align: left;
     margin-left: 15%;
     margin-top: 0%;
-    font-size: 20px;
+    font-size: 3.5vh;
 `;
 
 export const FinalizeOrder = styled(ProductDiv)`
