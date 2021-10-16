@@ -1,5 +1,3 @@
-# Movie ON
-
 <p align="center">
     <img src="https://github.com/Layssaa/movie-on/blob/main/src/images/Logo-main.png" alt="logo movie-on"/>
 </p>
