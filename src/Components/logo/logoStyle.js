@@ -16,7 +16,16 @@ export const LogoImgSecondary = styled.img`
     cursor: pointer;
 `;
 
-export const LogoImgFinished = styled.img`
-    width: 15.5%;
-    height:17%;
+export const DivLogo = styled.div`
+    width: 45vw;
+    height:52vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 `;
+
+export const LogoImgFinished = styled.img`
+    width: 11.6vw;
+    height:10vh;
+`;
+

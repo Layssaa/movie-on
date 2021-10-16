@@ -44,12 +44,6 @@ export const GlobalStyle = createGlobalStyle`
 
     padding: 10px 0px;
   }
-
-  @media screen and (max-width: 640px) {
-    body {
-     
-    }
-  }
   
 
 `

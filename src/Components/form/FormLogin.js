@@ -7,6 +7,7 @@ import { ButtonForm } from "../Button/ButtonStyled";
 import { MyContext } from "../../Context/Context";
 import gif from "../../images/gif/completed.gif";
 import { Load, LoadLogin } from "../logo/Loading";
+import { DivLogo } from "../logo/logoStyle";
 
 export default function FormLogin(props) {
 
@@ -23,11 +24,11 @@ export default function FormLogin(props) {
         if (response === "Usuário inválido") {
             setLoad(false)
             setInvalid(true)
-        }else{
+        } else {
             setLoad(false)
             props.history.push("/home");
         }
-       
+
     }
 
     const formik = useFormik({
@@ -41,7 +42,11 @@ export default function FormLogin(props) {
     });
 
     if (load) {
-        return <LoadLogin src={gif} />
+        return (
+            <DivLogo>
+                <LoadLogin src={gif} />
+            </DivLogo>
+        )
     }
 
     return (
@@ -63,7 +68,7 @@ export default function FormLogin(props) {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                 />
-                {invalid?<ErroText>User not found</ErroText>:<></>}
+                {invalid ? <ErroText>User not found</ErroText> : <></>}
                 <Text>Forgot your password?   <span>Click here.</span> </Text>
                 <TextCreatAcount><Link to={`login/signup`}>I don't have an account yet. </Link></TextCreatAcount>
 

@@ -6,6 +6,7 @@ import { ButtonForm } from "../Button/ButtonStyled";
 import * as Yup from 'yup';
 import { LoadLogin } from "../logo/Loading";
 import gif from "../../images/gif/completed.gif";
+import { DivLogo } from "../logo/logoStyle";
 
 export default function FormRegister(props) {
     const { handleSignUp } = useContext(MyContext);
@@ -48,7 +49,11 @@ export default function FormRegister(props) {
     });
 
     if (load) {
-        return <LoadLogin src={gif} />
+        return(
+            <DivLogo>
+                <LoadLogin src={gif} />
+            </DivLogo>
+        )
     };
 
     return (
