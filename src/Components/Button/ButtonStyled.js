@@ -15,12 +15,12 @@ export const ButtonDefault = styled.button`
 `;
 
 export const ButtonInitial = styled(ButtonDefault)`
-    width: 70vh;
+    width: 30vw;
     height: 10%;
     background-color: #8850BF;
     border-radius: 4px;
     color: #fff;
-    font-size: 4vh;
+    font-size: 1.8vw;
     font-weight: 400;
     position: relative;
     z-index: 2;

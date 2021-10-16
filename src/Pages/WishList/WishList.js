@@ -13,8 +13,8 @@ export default function WishList() {
     const history = useHistory();
 
     const goToSingleMovie = (idMovie) => {
-        history.push(`/movie/${idMovie}`)
-    }
+        history.push(`/movie/${idMovie}`);
+    };
 
     return (
         <Main>
@@ -26,5 +26,5 @@ export default function WishList() {
 
             </Dashboard>
         </Main>
-    )
-}
+    );
+};

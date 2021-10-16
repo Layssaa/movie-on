@@ -17,13 +17,14 @@ function CustomRoute(props) {
             <Main>
                 <Logo src={gif} />
             </Main>)
-    }
+    };
 
     if (props.isPrivate && !authenticated) {
         return <Redirect to="/login" exact />;
-    }
+    };
+
     return <Route {...props} />;
-}
+};
 
 function Routes() {
     return (
@@ -38,6 +39,6 @@ function Routes() {
             </Switch>
         </BrowserRouter>
     );
-}
+};
 
 export default Routes;

@@ -28,13 +28,13 @@ export default function SingleProduct() {
                 <Header />
                 <Load src={Loading} />
             </Main>
-        )
-    }
+        );
+    };
 
     return (
         <Main>
             <Header />
             <Product addMovie={setAddMovie} movie={movie} cast={credit}/>
         </Main>
-    )
-}
+    );
+};

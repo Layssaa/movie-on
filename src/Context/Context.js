@@ -32,8 +32,6 @@ export function MyProvider({ children }) {
     useEffect(() => localStorage.setItem("wishlist", JSON.stringify(wishList)), [wishList]);
 
 
-
-
     // ------------------------- Login -------------------------
     const handleLogin = async (values) => {
 
@@ -100,18 +98,14 @@ export function MyProvider({ children }) {
 
         setAuthenticated(false);
 
-        setMovieOnCart([])
-        setWishList([])
-        setMovieOnHistory([])
-        setLoading([])
-        setUser([])
+        setMovieOnCart([]);
+        setWishList([]);
+        setMovieOnHistory([]);
+        setLoading([]);
+        setUser([]);
+        setLoading(false);
 
-        // localStorage.removeItem("user");
-        // localStorage.removeItem("cartMovie");
-        // localStorage.removeItem("wishlist");
-        // localStorage.removeItem("authentic");
-
-        localStorage.clear()
+        localStorage.clear();
 
     }
 

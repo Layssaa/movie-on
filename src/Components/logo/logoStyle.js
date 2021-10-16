@@ -6,7 +6,7 @@ export const LogoImg = styled.img`
     position: relative;
     z-index: 2;
   
-`
+`;
 
 export const LogoImgSecondary = styled.img`
     width: 7%;
@@ -14,13 +14,9 @@ export const LogoImgSecondary = styled.img`
     position: relative;
     z-index: 2;
     cursor: pointer;
-`
-
-// width: 13vh;
-// height: 10vh;
+`;
 
 export const LogoImgFinished = styled.img`
     width: 15.5%;
     height:17%;
-   
-`
+`;

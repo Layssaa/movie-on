@@ -30,8 +30,8 @@ export default function Header() {
     }
 
     const Exit = () => {
-        handleLogout()
-        setDisplay(false)
+        handleLogout();
+        setDisplay(false);
     }
 
     return (

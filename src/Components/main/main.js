@@ -19,9 +19,11 @@ export const Main = styled(Flex)`
     text-align:center;
     gap: 2%;
 
-    h3{
-        font-size: 4.5vh;
-        margin-top: 0.5%;
-        height: fit-content;
-    }
+   
 `;
+
+// h3{
+//     font-size: 4.5vh;
+//     margin-top: 0.5%;
+//     height: fit-content;
+// }

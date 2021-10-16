@@ -6,8 +6,6 @@ import React, { useContext, useState } from "react";
 import { ButtonForm } from "../Button/ButtonStyled";
 import { MyContext } from "../../Context/Context";
 import gif from "../../images/gif/completed.gif";
-import * as Yup from 'yup';
-import { DivErro, MessageErro } from "../Input/InputStyle";
 import { Load, LoadLogin } from "../logo/Loading";
 
 export default function FormLogin(props) {
@@ -17,14 +15,6 @@ export default function FormLogin(props) {
     const [load, setLoad] = useState(false);
     const [invalid, setInvalid] = useState(false);
 
-
-    // const SignupSchema = Yup.object().shape({
-    //     email: Yup.string()
-    //         .email('Invalid email')
-    //         .required('Required'),
-    //     password: Yup.string()
-    //         .required('Required'),
-    // });
 
     const changePage = async (values) => {
         setLoad(true)
@@ -73,16 +63,6 @@ export default function FormLogin(props) {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                 />
-                {/* <DivErro>
-                    { formik.touched.email && !authenticated ? (<>
-                        <MessageErro>{formik.errors.email}</MessageErro>
-                    </>
-                    ) : null}
-                     { formik.touched.password && !authenticated? (<>
-                        <MessageErro>{formik.errors.password}</MessageErro>
-                    </>
-                    ) : null}
-                </DivErro> */}
                 {invalid?<ErroText>User not found</ErroText>:<></>}
                 <Text>Forgot your password?   <span>Click here.</span> </Text>
                 <TextCreatAcount><Link to={`login/signup`}>I don't have an account yet. </Link></TextCreatAcount>
