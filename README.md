@@ -1,6 +1,11 @@
 <p align="center">
     <img src="https://github.com/Layssaa/movie-on/blob/main/src/images/Logo-main.png" alt="logo movie-on"/>
 </p>
+<img width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
+<img width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
+<img width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" />
+
+<div>Esse projeto foi construi </div>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
