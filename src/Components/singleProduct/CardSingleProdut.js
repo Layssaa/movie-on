@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { AddCart } from "../addCart/AddCart";
 import { ImgMovie, ProductDiv, Info, Price, Evaluation, Cast, DivDefault, Actors, CardCast, Name, PDefault, Close } from "./CardSingleProductStyle";
 
 const imgURL = "https://image.tmdb.org/t/p/w300";
 
 export default function Product(props) {
     const [open, setOpen] = useState(false);
+    const [addCartFeedback, setAddCartFeedback] = useState(false);
 
     const movie = props.movie;
     const genres = movie.genres;
@@ -22,8 +24,14 @@ export default function Product(props) {
         } else {
             setOpen(true);
         }
-
     };
+
+    const handleFeedback = () =>{
+        addMovie(movie);
+        setAddCartFeedback(true);
+        setTimeout(() => { setAddCartFeedback(false) }, 1500);
+
+    }
 
     return (
         <ProductDiv>
@@ -51,13 +59,15 @@ export default function Product(props) {
                 }
                 </Cast>
                 <DivDefault>
-                    <button onClick={() => { addMovie(movie) }} >WATCH</button>
+                    <button onClick={handleFeedback} >WATCH</button>
 
                     <Price>${Number(movie.vote_average) * 10},00</Price>
                     <Evaluation> {Number(movie.vote_average) * 10}% </Evaluation>
                 </DivDefault>
                 {open ? <Close onClick={handleClick}>X</Close> : <></>}
             </Info>
+         <AddCart open={addCartFeedback}/>
+
         </ProductDiv>
     )
 }

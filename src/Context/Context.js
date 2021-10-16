@@ -12,14 +12,27 @@ export const MyContext = React.createContext({
 });
 
 export function MyProvider({ children }) {
-    const [authenticated, setAuthenticated] = useState(false);
-    const [CartMovie, setMovieOnCart] = useState([]);
-    const [wishList, setWishList] = useState([]);
+    const [authenticated, setAuthenticated] = useState(Boolean(localStorage.getItem("authentic")) || false);
+    const [CartMovie, setMovieOnCart] = useState(JSON.parse(localStorage.getItem("cartMovie")) || []);
+    const [wishList, setWishList] = useState(JSON.parse(localStorage.getItem("wishlist")) || []);
     const [moviesOnHistory, setMovieOnHistory] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState({ email: "", password: "" });
+    const [user, setUser] = useState(0);
 
-    useEffect(() => setLoading(false));
+    useEffect(() => setLoading(false),[]);
+
+    useEffect(() => {
+        if (user === 0) {
+            return
+        }
+        localStorage.setItem("user", JSON.stringify(user))
+    }, [user]);
+
+    useEffect(() => localStorage.setItem("cartMovie", JSON.stringify(CartMovie)), [CartMovie]);
+    useEffect(() => localStorage.setItem("wishlist", JSON.stringify(wishList)), [wishList]);
+
+
+
 
     // ------------------------- Login -------------------------
     const handleLogin = async (values) => {
@@ -27,13 +40,14 @@ export function MyProvider({ children }) {
         const userLogin = {
             email: values.email,
             password: values.password
-        }
+        };
 
         const response = await Login_REQ(userLogin, user);
-        
+
         if (response.data.user === 0) {
-            return
+            return "Usuário inválido"
         }
+
         if (response.data == 0) {
             setAuthenticated(false);
             return
@@ -60,8 +74,6 @@ export function MyProvider({ children }) {
             movieList.forEach(unity => {
                 setMovieOnHistory(prevState => prevState.concat(unity));
             });
-
-
         });
 
         response.data.wishlist.forEach(element => {
@@ -79,12 +91,28 @@ export function MyProvider({ children }) {
         });
 
         setAuthenticated(true);
+        localStorage.setItem("authentic", true);
     }
 
     // ------------------------- Logout -------------------------
     const handleLogout = async () => {
-        setUser({ email: "", password: "" });
+        setUser(0);
+
         setAuthenticated(false);
+
+        setMovieOnCart([])
+        setWishList([])
+        setMovieOnHistory([])
+        setLoading([])
+        setUser([])
+
+        // localStorage.removeItem("user");
+        // localStorage.removeItem("cartMovie");
+        // localStorage.removeItem("wishlist");
+        // localStorage.removeItem("authentic");
+
+        localStorage.clear()
+
     }
 
     // ------------------------- Sign Up -------------------------
@@ -105,7 +133,7 @@ export function MyProvider({ children }) {
 
         setAuthenticated(true);
         setUser(response.data.id);
-
+        localStorage.setItem("authentic", true);
     }
 
     // ------------------------- cart movie -------------------------
@@ -134,7 +162,7 @@ export function MyProvider({ children }) {
             return
         }
 
-        const response = await Cart_REQ(CartMovie, user)
+        const response = await Cart_REQ(CartMovie, user);
     };
 
     const setRemoveMovie = async (movie) => {
@@ -148,6 +176,7 @@ export function MyProvider({ children }) {
         if (CartMovie.length == 0) {
             return
         }
+
         const response = await CartRemove_REQ(CartMovie, user);
     };
 
@@ -170,24 +199,24 @@ export function MyProvider({ children }) {
 
         if (wishList.length == 0) {
             return
-        }
+        };
 
-        const response = await WishList_REQ(wishList, user)
+        const response = await WishList_REQ(wishList, user);
     };
 
     const setRemoveWish = (movie) => {
         if (movie == []) {
             return
-        }
+        };
         setWishList((prevState) => {
             return prevState.filter((element) => element.id !== movie.id)
         });
 
         if (wishList.length == 0) {
             return
-        }
+        };
 
-        const response = WishListRemove_REQ(wishList, user)
+        const response = WishListRemove_REQ(wishList, user);
 
     };
 
@@ -198,14 +227,14 @@ export function MyProvider({ children }) {
         setMovieOnHistory(CartMovie);
 
         const response = await History_REQ(CartMovie, user);
-        setCleanMovie()
+        setCleanMovie();
 
     };
 
     const setCleanHistory = async () => {
         setMovieOnHistory([]);
-        const response = await HistoryClear_REQ(moviesOnHistory, user)
-    }
+        const response = await HistoryClear_REQ(moviesOnHistory, user);
+    };
 
     return (
         <MyContext.Provider

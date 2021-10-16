@@ -1,6 +1,6 @@
 import { routers } from "../../router/Router";
 import { SecondaryLogo } from '../../Components/logo/logo';
-import { HeaderHome, Cart, Profile, Quit } from "./headerStyle";
+import { HeaderHome, Cart, Profile, Quit, Badge } from "./headerStyle";
 import Search from "../search/Search";
 import img from "../../images/small.png"
 import imgProfile from "../../images/profile.png"
@@ -9,7 +9,7 @@ import React, { useContext, useState } from "react";
 import { MyContext } from "../../Context/Context";
 
 export default function Header() {
-    const { handleLogout } = useContext(MyContext);
+    const { handleLogout, CartMovie } = useContext(MyContext);
     const history = useHistory();
     const [display, setDisplay] = useState(false);
 
@@ -51,9 +51,10 @@ export default function Header() {
                     })}
                 <Search />
                 <Cart onClick={goCart} src={img} />
-                <Profile onClick={getOut} src={imgProfile} />
-                <Quit onClick={Exit} open={display}>QUIT</Quit>
-            </HeaderHome>
+                {CartMovie.length !== 0 ? <Badge>{CartMovie.length}</Badge>:null}
+                    <Profile onClick={getOut} src={imgProfile} />
+                    <Quit onClick={Exit} open={display}>QUIT</Quit>
+                </HeaderHome>
         </>
-    );
+            );
 };

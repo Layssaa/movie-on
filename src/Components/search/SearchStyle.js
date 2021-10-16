@@ -8,7 +8,7 @@ export const SearchArea = styled.input`
     background: #121316;
     text-align:center;
     box-shadow: inset 0vh 0.5vh 0.13vh rgba(0, 0, 0, 0.25);
-    margin-top: 1.1%;
+    margin-top:2.5vh;
 
     &:focus{
         border: 1px solid #272727 ;

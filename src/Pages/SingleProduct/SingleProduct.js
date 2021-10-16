@@ -21,7 +21,6 @@ export default function SingleProduct() {
         })()
     }, []);
 
-    useEffect(()=> console.log(credit),[credit])
 
     if (!movie) {
         return (

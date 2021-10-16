@@ -75,3 +75,11 @@ export const TextCreatAcount = styled(Text)`
         color: #EBCDFF;
     }
 `;
+
+
+export const ErroText = styled.p`
+    font-size:2.5vh;
+    width: 100%;
+    height: fit-content;
+    color:#EF4F33;
+`;

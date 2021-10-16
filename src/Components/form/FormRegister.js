@@ -1,15 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MyContext } from "../../Context/Context";
 import Input from "../Input/Input"
 import { ErrorMessage, useFormik } from 'formik';
 import { ButtonForm } from "../Button/ButtonStyled";
 import * as Yup from 'yup';
+import { LoadLogin } from "../logo/Loading";
+import gif from "../../images/gif/completed.gif";
 
 export default function FormRegister(props) {
     const { handleSignUp } = useContext(MyContext);
+    const [load, setLoad] = useState(false);
 
     const changePage = async (values) => {
+        setLoad(true)
         await handleSignUp(values);
+        setLoad(false)
         props.history.push("/home");
     };
 
@@ -38,15 +43,13 @@ export default function FormRegister(props) {
         },
         validationSchema: SignupSchema,
         onSubmit: values => {
-            // if (values.password != values.repeatpassword) {
-            //     return
-            // };
             changePage(values);
         },
     });
 
-    console.log(formik.errors)
-    console.log(formik.errors.email)
+    if (load) {
+        return <LoadLogin src={gif} />
+    };
 
     return (
         <>

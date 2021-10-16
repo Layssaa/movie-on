@@ -10,12 +10,13 @@ import CardLetter from "../../Components/card/card";
 import { MyContext } from "../../Context/Context";
 import { REQ_MOVIES_WITH_CATEGORIES } from "../../Service_API/SERVER_request";
 import USE_PARAMS_CATEGORIE from "../../Context/UseParams_CAREGORIE";
+import { AddCart } from "../../Components/addCart/AddCart";
 
 export default function CategorieList() {
     const { setAddMovie } = useContext(MyContext)
     const [listMovies, setMoviesList] = useState();
     const history = useHistory();
-    const name =  USE_PARAMS_CATEGORIE();
+    const name = USE_PARAMS_CATEGORIE();
 
     const [addCartFeedback, setAddCartFeedback] = useState(false);
 
@@ -33,11 +34,14 @@ export default function CategorieList() {
 
     if (!listMovies) {
         return (
-            <Dashboard>
-                <Load src={imgLoading} />
-            </Dashboard>
+            <Main>
+                <Header />
+                <Dashboard>
+                    <Load src={imgLoading} />
+                </Dashboard>
+            </Main>
         )
-    }
+    };
 
     return (
         <Main>
@@ -50,7 +54,8 @@ export default function CategorieList() {
                         )
                     })
                 }
-                
+                <AddCart open={addCartFeedback} />
+
             </Dashboard>
         </Main>
     )

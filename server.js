@@ -83,7 +83,6 @@ app.post("/login", async (req, res) => {
 // ------------------------------------ SIGNUP - REGISTER - USER ------------------------------------
 app.post("/login/signup", async (req, res) => {
     const { userSignUp } = req.body;
-    console.log("CADASTRO");
 
     userSignUp.delete = false;
 
@@ -103,7 +102,6 @@ app.post("/login/signup", async (req, res) => {
             let data = result;
             userSignUp.id = data.length;
             let newList = data.concat(userSignUp);
-            console.log(userSignUp)
 
             fs.writeFile("./data/users.json", `${JSON.stringify(newList)}`, () => {
             });
@@ -114,7 +112,6 @@ app.post("/login/signup", async (req, res) => {
                 wishlist: [],
                 history: []
             }
-            console.log(data_USER)
             return res.send(data_USER);
         })
         .catch(erro => res.status(500).json({ message: erro.message }))

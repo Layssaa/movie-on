@@ -31,7 +31,6 @@ export const REQ_MOVIES_CREDIT = {
     async getCredit(movie_id) {
         try {
             const response = await axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${KEY}&language=en-US`)
-            console.log(response)
             return response.data.cast
         } catch {
             return false

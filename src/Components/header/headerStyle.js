@@ -27,6 +27,7 @@ export const Cart = styled.img`
     align-self:center;
     rigth: 3%;
     cursor:pointer;
+    margin-top:2vh;
 
     &:hover{
         transform: scale(1.1)
@@ -34,15 +35,16 @@ export const Cart = styled.img`
 `;
 
 export const Profile = styled.img`
-    width: 9vh;
-    height: 9vh;
+    width: 6.7vh;
+    height: 6.7vh;
     align-self:center;
     border-radius: 20vh;
     border: 2px solid #FFFFFF;
     cursor:pointer;
+    margin-top:2.2vh;
 
     &:hover{
-        transform: scale(1.1)
+        transform: scale(1)
     }
 `;
 
@@ -61,7 +63,7 @@ export const Quit = styled.div`
     text-align:center;
     background: #121316;
     border-radius: 4px;
-    border: 1px solid #0B0B0C;
+    border: 0.5px solid #0B0B0C;
 
     transition: all 0.5s ease-in-out;
 
@@ -69,3 +71,15 @@ export const Quit = styled.div`
         background: #23242C;
     }
 `;
+
+export const Badge = styled.span`
+    position:absolute;
+    background: #8850BF;
+    width:1.7vw ;
+    height:3.5vh;
+    border-radius: 2vh;
+    top: 9vh;
+    right: 27.5vh;
+    font-size: 2.5vh;
+
+`
