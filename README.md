@@ -4,7 +4,7 @@
 
 <h2>Sobre</h2>
 
-<div> Este projeto foi desenvolvido para simular uma aplicação de aluguel de filmes, utilizando a biblioteca ReactJs para a construção do front end e a API do TMDB para fazer as requisições dos filmes, utilizando uma API própria para a persistência dos dados do usuário.</div>
+<div> Este projeto foi desenvolvido para simular uma aplicação de aluguel de filmes, utilizando a biblioteca ReactJs para a construção do front end, a API do TMDB para fazer as requisições dos filmes e uma API própria para a persistência dos dados do usuário.</div>
 
 <br/>
 <p>Clique <a href="https://movie-on.netlify.app/" target="_blank">aqui</a> para acessar</p>
