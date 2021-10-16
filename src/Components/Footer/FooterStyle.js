@@ -13,5 +13,11 @@ export const Baseboard = styled.footer`
     span{
         width: 12%;
         cursor: pointer;
+
+        @media screen and (max-width: 600px) {
+            &{
+                width: 100%;
+            }
+          }
     }
 `

@@ -31,6 +31,12 @@ export const Card = styled.div`
     &:hover{
         transform: scale(1.03)
     }
+
+    @media screen and (max-width: 600px) {
+        &{
+            width:50% ;
+        }
+      }
 `;
 
 export const Img = styled.img`
@@ -98,4 +104,5 @@ export const CategorieCard = styled(Card)`
 
 export const Text = styled.h3`
         width: 85%;
+        height: 20%;
 `;

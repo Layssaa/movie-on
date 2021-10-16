@@ -9,16 +9,29 @@ export const HeaderHome = styled.header`
     align-items: center;
     position:absolute;
     p{
-        width: 6%;
+        width: fit-content;
         height: 12%;
         font-size: 3.5vh;
         cursor:pointer;
+
+        @media screen and (max-width: 600px) {
+            &{
+                font-size: 2vh;
+            }
+          }
     }
     
     p:hover{
         color: #EBCDFF ;
     }
 
+    @media screen and (max-width: 600px) {
+        &{
+            gap: 1vw;
+            justify-content: space-around;
+        }
+      }
+   
 `;
 
 export const Cart = styled.img`
@@ -32,6 +45,12 @@ export const Cart = styled.img`
     &:hover{
         transform: scale(1.1)
     }
+
+    @media screen and (max-width: 600px) {
+        &{
+           width: 10%;
+        }
+      }
 `;
 
 export const Profile = styled.img`
@@ -46,6 +65,12 @@ export const Profile = styled.img`
     &:hover{
         transform: scale(1)
     }
+
+    @media screen and (max-width: 600px) {
+        &{
+           display:none;
+        }
+      }
 `;
 
 export const Quit = styled.div`
@@ -77,9 +102,17 @@ export const Badge = styled.span`
     background: #8850BF;
     width:1.7vw ;
     height:3.5vh;
-    border-radius: 2vh;
+    border-radius: 2vw;
     top: 9vh;
-    right: 27.5vh;
+    right: 12.5vw;
     font-size: 2.5vh;
+
+    @media screen and (max-width: 600px) {
+        &{
+            width:4vw ;
+            font-size: 2vh;
+            right: 1vw;
+        }
+      }
 
 `

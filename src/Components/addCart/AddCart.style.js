@@ -17,9 +17,17 @@ export const FeedbackSpan = styled.div`
     border-radius: 0.9vh;
 
     font-size: 3.5vh;
+
+    
+    @media screen and (max-width: 600px) {
+        &{
+            width:70% ;
+         font-size: 3vh;
+
+        }
+      }
 `;
 
-// 4CB279
 
 export const SpanFeedback = styled.span`
    margin-top: 5%;

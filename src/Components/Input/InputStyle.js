@@ -23,6 +23,13 @@ export const InputStyle = styled.input`
         background: #1D1F26;
 
     }
+
+       
+    @media screen and (max-width: 600px) {
+        &{
+            font-size: 3vh;
+        }
+      }
 `;
 
 export const InputFlex = styled(Flex)`

@@ -8,6 +8,9 @@ import Button from "../../Components/Button/Button";
 import { ButtonCancel, FinalizeOrder, H3 } from "../../Components/card/cardCart.style";
 import { useHistory } from "react-router-dom";
 import { RemoveCart } from "../../Components/addCart/AddCart";
+import { ButtonTeste } from "../../Components/Button/ButtonStyled";
+import { Text } from "../../Components/card/card.style";
+
 
 export default function Cart() {
     const { CartMovie, setRemoveMovie, setAddHistory, setCleanMovie } = useContext(MyContext);
@@ -47,7 +50,7 @@ export default function Cart() {
             <Main>
                 <Header />
                 <ProductDiv>
-                    <h3>Vazio</h3>
+                    <Text>Vazio</Text>
                 </ProductDiv>
             </Main>
 
@@ -66,7 +69,7 @@ export default function Cart() {
                     }
                 </FinalizeOrder>
                 <H3>R${total},00</H3>
-                <Button onClick={finalizedOrder}>FINALIZE ORDER</Button>
+                <ButtonTeste onClick={finalizedOrder}>FINALIZE ORDER</ButtonTeste>
                 <ButtonCancel onClick={cancel}>CANCEL</ButtonCancel>
                 <RemoveCart open={removed} />
             </ProductDiv>

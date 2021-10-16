@@ -45,5 +45,4 @@ export const GlobalStyle = createGlobalStyle`
     padding: 10px 0px;
   }
   
-
 `

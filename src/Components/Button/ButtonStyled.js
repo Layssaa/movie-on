@@ -25,6 +25,14 @@ export const ButtonInitial = styled(ButtonDefault)`
     position: relative;
     z-index: 2;
     text-align:center;
+
+    @media screen and (max-width: 600px) {
+        &{
+            width: 80%;
+            height:8%;
+            font-size: 4vh;
+        }
+      }
 `
 
 export const ButtonForm = styled(ButtonDefault)`
@@ -40,6 +48,15 @@ export const ButtonForm = styled(ButtonDefault)`
     z-index: 2;
     text-align:center;
     cursor:pointer;
+
+    
+    @media screen and (max-width: 600px) {
+        &{
+            width: 90%;
+            height:15%;
+            font-size: 4vh;
+        }
+      }
 `
 
 export const ButtonPagination = styled(ButtonDefault)`
@@ -49,5 +66,25 @@ export const ButtonPagination = styled(ButtonDefault)`
     box-shadow: -5px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 2px;
     align-self:flex-end;
+`
 
+export const ButtonTeste = styled(ButtonInitial)`
+    width: 30vw;
+    height: 10%;
+    background-color: #8850BF;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1.8vw;
+    font-weight: 400;
+    position: relative;
+    z-index: 2;
+    text-align:center;
+
+    @media screen and (max-width: 600px) {
+        &{
+            width: 80%;
+            height:8%;
+            font-size:3vh;
+        }
+      }
 `

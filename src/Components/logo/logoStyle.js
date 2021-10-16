@@ -5,7 +5,13 @@ export const LogoImg = styled.img`
     height: 13%;
     position: relative;
     z-index: 2;
-  
+
+    @media screen and (max-width: 600px) {
+        &{
+            width: 40%;
+            height:10%;
+        }
+      }
 `;
 
 export const LogoImgSecondary = styled.img`
@@ -14,6 +20,14 @@ export const LogoImgSecondary = styled.img`
     position: relative;
     z-index: 2;
     cursor: pointer;
+
+    @media screen and (max-width: 600px) {
+        &{
+            width: 20%;
+            height:40%;
+            font-size: 4vh;
+        }
+      }
 `;
 
 export const DivLogo = styled.div`

@@ -15,18 +15,41 @@ export const ListMovie = styled.div`
         width : fit-content;
         height: 10%;
         font-size:3.5vh;
+
+        @media screen and (max-width: 600px) {
+            &{
+                 font-size:2vh;
+            }
+          }
     }
+
+    @media screen and (max-width: 600px) {
+        &{
+            height:25%;
+        }
+      }
 `;
 
 export const ImgMovieCart = styled.img`
    width : 10%;
    height:100%;
 
+   @media screen and (max-width: 600px) {
+    &{
+        width:12%;
+    }
 `;
+
 export const ImgTrash = styled.img`
    width : 3%;
    height:25%;
    cursor:pointer;
+
+   @media screen and (max-width: 600px) {
+    &{
+        width : 10%;
+    }
+  }
 `;
 
 export const ButtonCancel = styled(ButtonDefault)`
@@ -43,6 +66,14 @@ export const ButtonCancel = styled(ButtonDefault)`
     &:active{
         border-bottom: 3px solid #16171B;
     }
+
+    @media screen and (max-width: 600px) {
+        &{
+            width: 80%;
+            height:8%;
+            font-size:3vh;
+            background: #40424E;
+        }
 
 `;
 

@@ -14,5 +14,11 @@ export const SearchArea = styled.input`
         border: 1px solid #272727 ;
     }
 
+    @media screen and (max-width: 600px) {
+        &{
+           display:none;
+        }
+      }
+
 
 `

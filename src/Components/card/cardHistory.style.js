@@ -19,9 +19,17 @@ export const ButtonTrash = styled.div`
     &:hover{
         background: #101011;
     }
+
+    @media screen and (max-width: 600px) {
+        &{
+            width: 28%;
+           left: 68%;
+        }
+      }
 `
 
 export const Trash = styled.img`
     width: 70%;
     height: 70%;
+
 `

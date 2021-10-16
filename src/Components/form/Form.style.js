@@ -14,6 +14,13 @@ export const Form = styled.div`
     position:relative;
     z-index:2;
     margin-bottom: 5%;
+
+    @media screen and (max-width: 600px) {
+        &{
+            width: 80%;
+            height:50%;
+        }
+      }
 `;
 
 export const Head = styled.div`
@@ -66,6 +73,12 @@ export const Text = styled.p`
         width: inherit;
         height: inherit;
     }
+    
+    @media screen and (max-width: 600px) {
+        &{
+           font-size: 2vh;
+        }
+      }
 `;
 
 export const TextCreatAcount = styled(Text)`
@@ -74,6 +87,12 @@ export const TextCreatAcount = styled(Text)`
     a:hover{
         color: #EBCDFF;
     }
+
+    @media screen and (max-width: 600px) {
+        &{
+           font-size: 2vh;
+        }
+      }
 `;
 
 
