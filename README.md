@@ -1,5 +1,8 @@
-# MOVIE - ON
-![Movie - ON](https://github.com/Layssaa/movie-on/blob/main/src/images/Logo-main.png)
+# Movie ON
+
+<p align="center">
+    <img src="https://github.com/Layssaa/movie-on/blob/main/src/images/Logo-main.png" alt="logo movie-on"/>
+</p>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
