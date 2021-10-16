@@ -173,3 +173,7 @@ export const Close = styled.p`
     font-weight: 100;
     font-size: 3.2vh;
 `;
+
+export const H3 = styled.h3`
+    height: fit-content;
+`

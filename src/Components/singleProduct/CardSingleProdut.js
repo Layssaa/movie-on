@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AddCart } from "../addCart/AddCart";
-import { ImgMovie, ProductDiv, Info, Price, Evaluation, Cast, DivDefault, Actors, CardCast, Name, PDefault, Close } from "./CardSingleProductStyle";
+import { ImgMovie, ProductDiv, Info, Price, Evaluation, Cast, DivDefault, Actors, CardCast, Name, PDefault, Close, H3 } from "./CardSingleProductStyle";
 
 const imgURL = "https://image.tmdb.org/t/p/w300";
 
@@ -37,7 +37,7 @@ export default function Product(props) {
         <ProductDiv>
             <ImgMovie src={`${imgURL}${props.movie.poster_path}`} />
             <Info>
-                <h3>{movie.title}</h3>
+                <H3>{movie.title}</H3>
                 <PDefault>{movie.release_date}</PDefault>
                 <PDefault>{names.join([", "])}</PDefault>
 

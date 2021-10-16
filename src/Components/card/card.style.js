@@ -92,6 +92,7 @@ export const CategorieCard = styled(Card)`
         h3{
             cursor:pointer;
             font-size: 3.5vh;
+            height: fit-content;
         }
 `;
 
