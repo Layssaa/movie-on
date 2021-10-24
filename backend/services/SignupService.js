@@ -1,4 +1,4 @@
-const readTheFile = require("../src/functions/readfile");
+const readTheFile = require("./readfile");
 
 const SignUPService = async (_data) => {
     await readTheFile("./backend/data/users.json")

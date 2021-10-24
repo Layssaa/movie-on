@@ -1,5 +1,5 @@
 const fs = require('fs');
-const readTheFile = require("../src/functions/readfile");
+const readTheFile = require("../services/readfile");
 
 // ------------------------------------ WISHLIST - ADD  ------------------------------------
 const Wishlist = async (req, res) => {
