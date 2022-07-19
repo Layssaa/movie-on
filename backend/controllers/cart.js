@@ -1,53 +1,32 @@
-const fs = require('fs');
-const readTheFile = require("../services/readfile");
+const { CartAddService, CardRemoveService } = require("../services/cart");
 
 const CartAdd = async (req, res) => {
-    const { CartMovie } = req.body;
-    const { user } = req.body;
+  try {
+    const { data, error } = await CartAddService(req.body);
 
-    const data_USER = [{
-        id: user,
-        data: CartMovie,
-        delete: false
-    }];
+    if (error) throw new Error(error);
 
-    readTheFile("./backend/data/cart.json")
-        .then(result => result.concat(data_USER))
-        .then(result => {
-            fs.writeFile("./backend/data/cart.json", `${JSON.stringify(result)}`, () => {
-            });
-            return res.send("Carrinho atualizado");
-        })
-        .catch(erro => res.status(500).json({ message: erro.message }));
+    res.send({ data });
+  } catch (error) {
+    console.log(error);
+    res.send({ msg: error.message, status: 401 });
+  }
 };
 
 const CartRemove = async (req, res) => {
-    const { CartMovie } = req.body;
-    const { user } = req.body;
+  try {
+    const { data, error } = await CardRemoveService(req.body);
 
-    const data_USER = {
-        id: user,
-        data: CartMovie,
-        delete: true
-    }
+    if (error) throw new Error(error);
 
-    readTheFile("./backend/data/cart.json")
-        .then(result => {
-            const data = result.filter((element) => {
-                return element.id !== data_USER.id
-            })
-            return data.concat(data_USER)
-        })
-        .then(result => {
-            fs.writeFile("./backend/data/cart.json", `${JSON.stringify(result)}`, () => {
-
-            });
-            return res.send("Carrinho atualizado");
-        })
-        .catch(erro => res.status(500).json({ message: erro.message }))
+    res.send({ msg: data.msg, data });
+  } catch (error) {
+    console.log(error);
+    res.send({ msg: error.message, status: 401 });
+  }
 };
 
 module.exports = {
-    CartAdd,
-    CartRemove
+  CartAdd,
+  CartRemove,
 };

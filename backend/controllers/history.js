@@ -1,55 +1,32 @@
-const fs = require('fs');
-const readTheFile = require("../services/readfile");
+const { historyAddService, historyClearService } = require("../services/history");
 
 // ------------------------------------ HISTORY - ADD  ------------------------------------
 const HistoryAdd = async (req, res) => {
-    const { moviesOnHistory } = req.body;
-    const { user } = req.body;
+  try {
+    const { data, error } = await historyAddService(req.body);
 
-    const data_USER = {
-        id: user,
-        data: moviesOnHistory,
-        delete: false
-    }
+    if (error) throw new Error(error);
 
-    readTheFile("./backend/data/history.json")
-        .then(result => result.concat(data_USER))
-        .then(result => {
-            fs.writeFile("./backend/data/history.json", `${JSON.stringify(result)}`, () => {
-            });
-
-            return res.send(result);
-        })
-        .catch(erro => res.status(500).json({ message: erro.message }))
+    res.send({ msg: data.msg, data });
+  } catch (error) {
+    res.send({ msg: error.message, status: 401 });
+  }
 };
 
 // ------------------------------------ HISTORY - REMOVE  ------------------------------------
 const HistoryDelete = async (req, res) => {
-    const { moviesOnHistory } = req.body;
-    const { user } = req.body;
+  try {
+    const { data, error } = await historyClearService(req.body);
 
-    const data_USER = {
-        id: user,
-        data: moviesOnHistory,
-        delete: true
-    }
+    if (error) throw new Error(error);
 
-    readTheFile("./backend/data/history.json")
-        .then(result => {
-            const data = result.filter((element) => element.id !== data_USER.id);
-            const data_FILTER = data.concat(data_USER);
-
-            return data_FILTER
-        })
-        .then(result => {
-            fs.writeFile("./backend/data/history.json", `${JSON.stringify(result)}`, () => {
-            });
-            return res.send("history atualizado");
-        })
-        .catch(erro => res.status(500).json({ message: erro.message }))
+    res.send({ msg: data.msg, data });
+  } catch (error) {
+    res.send({ msg: error.message, status: 401 });
+  }
 };
 
 module.exports = {
-    HistoryAdd,
-    HistoryDelete
-}
+  HistoryAdd,
+  HistoryDelete,
+};
