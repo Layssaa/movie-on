@@ -1,263 +1,243 @@
 import React, { useEffect, useState } from "react";
-import { array } from "yup";
-import api from "../services/api"
-import { CartRemove_REQ, Cart_REQ, HistoryClear_REQ, History_REQ, Login_REQ, SingUp_REQ, WishListRemove_REQ, WishList_REQ } from "./SERVER_Requests"
+import {
+  CartRemove_REQ,
+  Cart_REQ,
+  HistoryClear_REQ,
+  History_REQ,
+  Login_REQ,
+  SingUp_REQ,
+  WishListRemove_REQ,
+  WishList_REQ,
+} from "./SERVER_Requests";
 
 export const MyContext = React.createContext({
-    id: null,
-    user: null,
-    moviesOnCart: [],
-    moviesOnWishList: [],
-    moviesOnHistory: []
+  id: null,
+  user: null,
+  moviesOnCart: [],
+  moviesOnWishList: [],
+  moviesOnHistory: [],
 });
 
 export function MyProvider({ children }) {
-    const [authenticated, setAuthenticated] = useState(Boolean(localStorage.getItem("authentic")) || false);
-    const [CartMovie, setMovieOnCart] = useState(JSON.parse(localStorage.getItem("cartMovie")) || []);
-    const [wishList, setWishList] = useState(JSON.parse(localStorage.getItem("wishlist")) || []);
-    const [moviesOnHistory, setMovieOnHistory] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(0);
+  const [authenticated, setAuthenticated] = useState(
+    Boolean(localStorage.getItem("authentic")) || false
+  );
+  const [CartMovie, setMovieOnCart] = useState(
+    JSON.parse(localStorage.getItem("cartMovie")) || []
+  );
+  const [wishList, setWishList] = useState(
+    JSON.parse(localStorage.getItem("wishlist")) || []
+  );
+  const [moviesOnHistory, setMovieOnHistory] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(0);
+  const [token, setToken] = useState(
+    JSON.parse(localStorage.getItem("token")) || ""
+  );
 
-    useEffect(() => setLoading(false),[]);
+  useEffect(() => setLoading(false), []);
+  useEffect(
+    () => localStorage.setItem("token", JSON.stringify(token)),
+    [token]
+  );
 
-    useEffect(() => {
-        if (user === 0) {
-            return
-        }
-        localStorage.setItem("user", JSON.stringify(user))
-    }, [user]);
+  useEffect(() => {
+    if (user === 0) {
+      return;
+    }
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
-    useEffect(() => localStorage.setItem("cartMovie", JSON.stringify(CartMovie)), [CartMovie]);
-    useEffect(() => localStorage.setItem("wishlist", JSON.stringify(wishList)), [wishList]);
+  useEffect(
+    () => localStorage.setItem("cartMovie", JSON.stringify(CartMovie)),
+    [CartMovie]
+  );
+  useEffect(
+    () => localStorage.setItem("wishlist", JSON.stringify(wishList)),
+    [wishList]
+  );
 
+  // ------------------------- Login -------------------------
+  const handleLogin = async (values) => {
+    const response = await Login_REQ({
+      email: values.email,
+      password: values.password,
+      user,
+      token,
+    });
+    const data = response.data.userdata;
 
-    // ------------------------- Login -------------------------
-    const handleLogin = async (values) => {
-
-        const userLogin = {
-            email: values.email,
-            password: values.password
-        };
-
-        const response = await Login_REQ(userLogin, user);
-
-        if (response.data.user === 0) {
-            return "Usuário inválido"
-        }
-
-        if (response.data == 0) {
-            setAuthenticated(false);
-            return
-        };
-
-        setUser(response.data.user || []);
-
-        response.data.cart.forEach(element => {
-            if (element.length == 0) {
-                return setAddMovie([]);
-            }
-
-            const movieList = element.data;
-
-            movieList.forEach(unity => {
-                setAddMovie(unity || []);
-            });
-        });
-
-        response.data.history.forEach(element => {
-
-            const movieList = element.data;
-
-            movieList.forEach(unity => {
-                setMovieOnHistory(prevState => prevState.concat(unity));
-            });
-        });
-
-        response.data.wishlist.forEach(element => {
-            if (element.length == 0) {
-                return setAddWish([]);
-            }
-
-            const movieList = element.data;
-
-            movieList.forEach(unity => {
-                setAddWish(unity || []);
-            });
-
-            setLoading(false)
-        });
-
-        setAuthenticated(true);
-        localStorage.setItem("authentic", true);
+    if (!data || !data.id) {
+      setAuthenticated(false);
+      return;
     }
 
-    // ------------------------- Logout -------------------------
-    const handleLogout = async () => {
-        setUser(0);
+    setUser(data.id);
+    setMovieOnCart(data.cart || []);
+    setMovieOnHistory(data.history || []);
+    setWishList(data.wishlist || []);
+   
 
-        setAuthenticated(false);
 
-        setMovieOnCart([]);
-        setWishList([]);
-        setMovieOnHistory([]);
-        setLoading([]);
-        setUser([]);
-        setLoading(false);
 
-        localStorage.clear();
 
+
+    setAuthenticated(true);
+    localStorage.setItem("authentic", true);
+    // localStorage.setItem("token", data.token);
+    setToken(data.token);
+  };
+
+  // ------------------------- Logout -------------------------
+  const handleLogout = async () => {
+    setUser(0);
+
+    setAuthenticated(false);
+
+    setMovieOnCart([]);
+    setWishList([]);
+    setMovieOnHistory([]);
+    setLoading([]);
+    setUser([]);
+    setLoading(false);
+    setToken("");
+
+    localStorage.clear();
+  };
+
+  // ------------------------- Sign Up -------------------------
+  const handleSignUp = async (values) => {
+    const response = await SingUp_REQ({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      repeatpassword: values.repeatpassword,
+    });
+
+    if (response.data.error && response.data.status === 401) {
+      return { error: response.data.error };
     }
 
-    // ------------------------- Sign Up -------------------------
-    const handleSignUp = async (values) => {
-        const userSignUp = {
-            name: values.name,
-            email: values.email,
-            password: values.password,
-            repeatpassword: values.repeatpassword
-        }
-
-        const response = await SingUp_REQ(userSignUp)
-
-        if (response.data.length == 0) {
-            setAuthenticated(false);
-            return
-        };
-
-        setAuthenticated(true);
-        setUser(response.data.id);
-        localStorage.setItem("authentic", true);
+    if (!response.data.id || !response.data.token) {
+      setAuthenticated(false);
+      return;
     }
 
-    // ------------------------- cart movie -------------------------
-    const setAddMovie = async (movie) => {
+    setAuthenticated(true);
+    setUser(response.data.id);
+    localStorage.setItem("authentic", true);
+    // localStorage.setItem("token", response.data.token);
 
-        let movieObject;
+    setToken(response.data.token);
+    return { error: false };
+  };
 
-        if (!movie.length) {
-            movieObject = movie
-        } else {
-            movieObject = movie[0]
-        }
+  // ------------------------- cart movie -------------------------
+  const setAddMovie = async (movie) => {
+    const { data, error } = await Cart_REQ(movie, user, token);
 
-        if (movie == []) {
-            return
-        }
+    if (error)
+      throw new Error("Não foi possível adicionar o filme ao carrinho");
 
-        setMovieOnCart((prevState) => {
-            if (prevState.find((film) => film.id === movieObject.id)) {
-                return prevState
-            };
-            return prevState.concat(movieObject);
-        });
+    setMovieOnCart((prevState) => {
+      if (prevState.find((film) => film.id === data.id)) {
+        return prevState;
+      }
+      return prevState.concat(movie);
+    });
 
-        if (CartMovie.length == 0) {
-            return
-        }
+  };
 
-        const response = await Cart_REQ(CartMovie, user);
-    };
+  const setRemoveMovie = async (movie) => {
+    if (movie == []) {
+      return;
+    }
+    setMovieOnCart((prevState) => {
+      return prevState.filter((element) => element.id !== movie.id);
+    });
 
-    const setRemoveMovie = async (movie) => {
-        if (movie == []) {
-            return
-        }
-        setMovieOnCart((prevState) => {
-            return prevState.filter((element) => element.id !== movie.id);
-        });
+    if (CartMovie.length == 0) {
+      return;
+    }
 
-        if (CartMovie.length == 0) {
-            return
-        }
+     await CartRemove_REQ(movie, token);
+  };
 
-        const response = await CartRemove_REQ(CartMovie, user);
-    };
+  const setCleanMovie = () => {
+    setMovieOnCart([]);
+  };
 
-    const setCleanMovie = () => {
-        setMovieOnCart([]);
-    };
+  // ------------------------- wishlist -------------------------
 
-    // ------------------------- wishlist -------------------------
+  const setAddWish = async (movie) => {
+    const { data, error } = await WishList_REQ(movie, token);
+    if (error)
+      throw new Error("Não foi possível adicionar o filme a lista de desejo");
 
-    const setAddWish = async (movie) => {
-        if (movie == []) {
-            return
-        }
-        setWishList((prevState) => {
-            if (prevState.find((film) => film.id === movie.id)) {
-                return prevState;
-            };
-            return prevState.concat(movie);
-        });
+    setWishList((prevState) => {
+      if (prevState.find((film) => film.id === data.id)) {
+        return prevState;
+      }
+      return prevState.concat(movie);
+    });
+  };
 
-        if (wishList.length == 0) {
-            return
-        };
+  const setRemoveWish = (movie) => {
+    if (movie == []) {
+      return;
+    }
+    WishListRemove_REQ(movie, token);
+    setWishList((prevState) => {
+      return prevState.filter((element) => element.id !== movie.id);
+    });
 
-        const response = await WishList_REQ(wishList, user);
-    };
+    if (wishList.length == 0) {
+      return;
+    }
+  };
 
-    const setRemoveWish = (movie) => {
-        if (movie == []) {
-            return
-        };
-        setWishList((prevState) => {
-            return prevState.filter((element) => element.id !== movie.id)
-        });
+  // ------------------------- history -------------------------
 
-        if (wishList.length == 0) {
-            return
-        };
+  const setAddHistory = async () => {
+    const { error } = await History_REQ(CartMovie, token);
+    if (error) throw new Error("Não foi possível salvar o histórico");
+    setCleanMovie();
+    setMovieOnHistory(CartMovie);
+  };
 
-        const response = WishListRemove_REQ(wishList, user);
+  const setCleanHistory = async () => {
+    setMovieOnHistory([]);
+    await HistoryClear_REQ(token);
+  };
 
-    };
+  return (
+    <MyContext.Provider
+      value={{
+        CartMovie,
+        setAddMovie,
+        setRemoveMovie,
+        setCleanMovie,
 
-    // ------------------------- history -------------------------
+        wishList,
+        setAddWish,
+        setRemoveWish,
 
-    const setAddHistory = async (movie) => {
+        moviesOnHistory,
+        setAddHistory,
+        setCleanHistory,
 
-        setMovieOnHistory(CartMovie);
+        user: null,
 
-        const response = await History_REQ(CartMovie, user);
-        setCleanMovie();
+        handleLogin,
+        handleLogout,
+        handleSignUp,
+        authenticated,
+        setAuthenticated,
 
-    };
-
-    const setCleanHistory = async () => {
-        setMovieOnHistory([]);
-        const response = await HistoryClear_REQ(moviesOnHistory, user);
-    };
-
-    return (
-        <MyContext.Provider
-            value={{
-                CartMovie,
-                setAddMovie,
-                setRemoveMovie,
-                setCleanMovie,
-
-                wishList,
-                setAddWish,
-                setRemoveWish,
-
-                moviesOnHistory,
-                setAddHistory,
-                setCleanHistory,
-
-                user: null,
-
-                handleLogin,
-                handleLogout,
-                handleSignUp,
-                authenticated,
-                setAuthenticated,
-
-                loading
-            }}
-        >
-            {children}
-        </MyContext.Provider>
-    );
-};
+        loading,
+      }}
+    >
+      {children}
+    </MyContext.Provider>
+  );
+}
